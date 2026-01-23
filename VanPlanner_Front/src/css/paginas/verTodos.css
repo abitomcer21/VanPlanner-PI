@@ -1,0 +1,333 @@
+body,html {
+    background: url('../../assets/images/fondoTodosLosViajes.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+}
+.contenedor-pagina {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.header-pagina {
+    background-color: var(--van-primario-v2, #3b82f6);
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.enlace-header {
+    color: var(--van-secundario-v3, #f3f4f6);
+    font-family: var(--font-titulo, 'Montserrat', sans-serif);
+    font-weight: 600;
+    transition: color 0.2s;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.enlace-header:hover {
+    color: var(--van-primario-v1, #1d4ed8);
+}
+
+.logo-header {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.texto-completo {
+    display: none;
+}
+
+.texto-movil {
+    display: inline;
+}
+
+@media (min-width: 640px) {
+    .enlace-header {
+        font-size: 1rem;
+    }
+    
+    .texto-completo {
+        display: inline;
+    }
+    
+    .texto-movil {
+        display: none;
+    }
+}
+
+.contenido-principal {
+    flex: 1;
+    position: relative;
+    overflow-y: auto;
+}
+
+.area-fondo {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.contenido-interior {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+}
+
+.titulo-seccion {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+    .titulo-seccion {
+        padding-top: 2rem;
+    }
+}
+
+.titulo-pagina {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--van-dark, #1e293b);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitulo-pagina {
+    color: var(--van-dark, #1e293b);
+    font-size: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    margin-top: 0.25rem;
+}
+
+@media (min-width: 768px) {
+    .titulo-pagina {
+        font-size: 1.875rem;
+    }
+    
+    .subtitulo-pagina {
+        font-size: 1.125rem;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .titulo-pagina {
+        font-size: 2.25rem;
+    }
+}
+
+.area-tarjetas {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 120px;
+}
+
+@media (min-width: 768px) {
+    .area-tarjetas {
+        padding-bottom: 80px;
+    }
+}
+
+.grid-tarjetas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+    .grid-tarjetas {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-tarjetas {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .grid-tarjetas {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.tarjeta-viaje {
+    background-color: var(--van-primario-v2, #3b82f6);
+    backdrop-filter: blur(8px);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-height: 140px;
+}
+
+@media (min-width: 768px) {
+    .tarjeta-viaje {
+        min-height: 160px;
+        padding: 1.5rem;
+    }
+}
+
+.cabecera-tarjeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .cabecera-tarjeta {
+        margin-bottom: 0.75rem;
+    }
+}
+
+.contenido-cabecera {
+    flex: 1;
+    margin-right: 0.5rem;
+    overflow: hidden;
+}
+
+.titulo-tarjeta {
+    font-size: 1.125rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+    .titulo-tarjeta {
+        font-size: 1.25rem;
+    }
+}
+
+.fecha-tarjeta {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+@media (min-width: 768px) {
+    .fecha-tarjeta {
+        font-size: 1rem;
+    }
+}
+
+.boton-editar {
+    background-color: var(--van-primario-v1, #1d4ed8);
+    transition: background-color 0.3s;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-editar:hover {
+    background-color: #1e40af;
+}
+
+@media (min-width: 768px) {
+    .boton-editar {
+        padding: 0.75rem;
+    }
+}
+
+.descripcion-tarjeta {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875rem;
+    margin-top: auto;
+}
+
+@media (min-width: 768px) {
+    .descripcion-tarjeta {
+        font-size: 1rem;
+    }
+}
+
+.contenedor-boton-flotante {
+    position: fixed;
+    z-index: 40;
+    bottom: 80px; 
+    right: 16px; 
+}
+
+@media (min-width: 640px) {
+    .contenedor-boton-flotante {
+        right: 24px; 
+        bottom: 90px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .contenedor-boton-flotante {
+        right: 32px;
+        bottom: 100px;
+    }
+}
+
+.boton-flotante {
+    background-color: #f59e0b;
+    transition: all 0.3s;
+    color: white;
+    font-weight: bold;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 9999px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    transform: scale(1);
+}
+
+.boton-flotante:hover {
+    background-color: #d97706;
+    transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+    .boton-flotante {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+}
+
+.texto-completo-boton {
+    display: none;
+}
+
+.texto-movil-boton {
+    display: inline;
+}
+
+@media (min-width: 640px) {
+    .texto-completo-boton {
+        display: inline;
+    }
+    
+    .texto-movil-boton {
+        display: none;
+    }
+}

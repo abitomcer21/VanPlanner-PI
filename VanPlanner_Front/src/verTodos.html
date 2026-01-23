@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Todos los Viajes</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/config/tailwind-config.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="css/paginas/verTodos.css">
+    <script src="js/pages/verTodos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+    <script src="js/components/loader.js"></script>
+
+
+
+</head>
+
+<body class="min-h-screen bg-gray-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- HEADER -->
+        <header class="bg-van-primario-v2 py-1 shadow-md">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-3 items-center">
+                    <div class="justify-self-start"></div>
+
+                    <div class="justify-self-center flex items-center space-x-4 md:space-x-8 lg:space-x-12">
+                        <a href="index.html"
+                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                            INICIO
+                        </a>
+
+                        <a href="index.html" class="-mt-2 -mb-3">
+                            <div class="flex items-center">
+                                <img src="assets/images/logoAplicacion.png" alt="VanPlanner"
+                                    class="h-20 w-auto md:h-28">
+                            </div>
+                        </a>
+
+                        <a href="nuevoViaje.html"
+                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                            NUEVO VIAJE
+                        </a>
+                    </div>
+
+                    <div class="justify-self-end">
+
+                        <el-dropdown class="inline-block">
+                            <button
+                                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-van-primario-v1 px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">
+                                ¡Hola, <span id="nombreUsuario">{nombre}!</span>
+                                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
+                                    class="-mr-1 size-5 text-gray-400">
+                                    <path
+                                        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                        clip-rule="evenodd" fill-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <el-menu anchor="bottom end" popover
+                                class="w-56 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                                <div class="py-1">
+                                    <a href="#"
+                                        class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
+                                    </a>
+
+                                    <form action="#" method="POST">
+                                        <button type="submit"
+                                            class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
+                                            sesión</button>
+                                    </form>
+                                </div>
+                            </el-menu>
+                        </el-dropdown>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow flex flex-col">
+            <div class="flex-grow relative">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+                    style="background-image: url('assets/images/fondoTodosLosViajes.jpg');">
+                </div>
+
+                <div class="absolute inset-0 bg-black/20"></div>
+
+                <div class="relative h-full flex flex-col">
+                    <div class="container mx-auto px-4 py-6 md:py-10 flex-shrink-0">
+                        <div class="text-center">
+                            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg">Todos mis
+                                viajes</h1>
+                            <p class="text-white text-lg md:text-xl drop-shadow-md mt-2">Gestiona y edita todos tus
+                                viajes</p>
+                        </div>
+                    </div>
+
+                    <div class="flex-grow overflow-hidden px-4">
+                        <div class="container mx-auto h-full">
+                            <div class="h-full overflow-y-auto pb-8">
+                                <div
+                                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-4">
+                                    <div
+                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div class="flex-1 mr-2">
+                                                <h3 class="text-xl font-bold truncate">Viaje a París</h3>
+                                                <p class="text-blue-100 mt-1">15 - 25 Junio 2026</p>
+                                            </div>
+                                            <a href="editarViaje.html"
+                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <p class="text-blue-100 mt-auto">Una semana en la ciudad del amor visitando la
+                                            Torre Eiffel.</p>
+                                    </div>
+
+                                    <div
+                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div class="flex-1 mr-2">
+                                                <h3 class="text-xl font-bold truncate">Aventura en Japón</h3>
+                                                <p class="text-blue-100 mt-1">10 - 30 Agosto 2026</p>
+                                            </div>
+                                            <a href="editarViaje.html"
+                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <p class="text-blue-100 mt-auto">Recorriendo Tokio, Kioto y Osaka. Experiencia
+                                            cultural.</p>
+                                    </div>
+
+                                    <div
+                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div class="flex-1 mr-2">
+                                                <h3 class="text-xl font-bold truncate">Playa en Cancún</h3>
+                                                <p class="text-blue-100 mt-1">5 - 12 Julio 2026</p>
+                                            </div>
+                                            <a href="editarViaje.html"
+                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <p class="text-blue-100 mt-auto">Relax en las mejores playas del Caribe
+                                            mexicano.</p>
+                                    </div>
+
+                                    <div
+                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div class="flex-1 mr-2">
+                                                <h3 class="text-xl font-bold truncate">Montañas de Suiza</h3>
+                                                <p class="text-blue-100 mt-1">20 - 30 Septiembre 2026</p>
+                                            </div>
+                                            <a href="editarViaje.html"
+                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <p class="text-blue-100 mt-auto">Senderismo en los Alpes suizos y paseos
+                                            panorámicos.</p>
+                                    </div>
+
+                                    <div
+                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div class="flex-1 mr-2">
+                                                <h3 class="text-xl font-bold truncate">Ruta 66 USA</h3>
+                                                <p class="text-blue-100 mt-1">1 - 15 Octubre 2026</p>
+                                            </div>
+                                            <a href="editarViaje.html"
+                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <p class="text-blue-100 mt-auto">Viaje por carretera por la mítica ruta 66 de
+                                            Estados Unidos.</p>
+                                    </div>
+
+                                    <div
+                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div class="flex-1 mr-2">
+                                                <h3 class="text-xl font-bold truncate">Cultura en Roma</h3>
+                                                <p class="text-blue-100 mt-1">12 - 20 Noviembre 2026</p>
+                                            </div>
+                                            <a href="editarViaje.html"
+                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <p class="text-blue-100 mt-auto">Historia, arte y gastronomía en la capital
+                                            italiana.</p>
+                                    </div>
+
+                                    <div
+                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div class="flex-1 mr-2">
+                                                <h3 class="text-xl font-bold truncate">Safari en Kenia</h3>
+                                                <p class="text-blue-100 mt-1">5 - 18 Diciembre 2026</p>
+                                            </div>
+                                            <a href="editarViaje.html"
+                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <p class="text-blue-100 mt-auto">Avistamiento de animales en su hábitat natural.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fixed bottom-24 right-4 sm:right-6 md:right-8 z-30">
+                <a href="nuevoViaje.html"
+                    class="bg-van-primario-v1 hover:bg-yellow-600 text-white font-bold py-3 px-4 md:py-4 md:px-6 rounded-full shadow-xl flex items-center transition duration-300 transform hover:scale-105">
+                    <i class="fas fa-plus mr-2 text-lg"></i>
+                    <span class="hidden sm:inline">Nuevo Viaje</span>
+                    <span class="sm:hidden">Nuevo</span>
+                </a>
+            </div>
+        </main>
+
+        <div id="footer-container"></div>
+
+    </div>
+</body>
+
+</html>

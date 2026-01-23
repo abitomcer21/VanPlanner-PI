@@ -1,0 +1,102 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --van-primario-v1: #F9BA32;
+    --van-primario-v2: #426E86;
+    --van-secundario-v1: #F8F1E5;
+    --van-secundario-v2: #2F3131;
+    --van-secundario-v3: #FFFFFF;
+    --van-alerta: #DC2626;
+    --van-correcto: #10B981;
+    --van-aviso: #F59E0B;
+    --van-neutro-1: #626D71;
+    --van-neutro-2: #E5E7EB;
+}
+
+body.page-index {
+    background: url('../assets/images/fondo-index.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+}
+
+body.page-index::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 0;
+}
+
+body.page-login {
+    background: url('../assets/images/fotoFondoInicioSesion.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+}
+
+body.page-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.page-index > *,
+.page-login > * {
+    position: relative;
+    z-index: 1;
+}
+
+body.page-registro {
+    background-color: var(--van-secundario-v1);
+    min-height: 100vh;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--van-secundario-v2);
+}
+
+.font-titulo {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.font-texto {
+    font-family: 'Inter', sans-serif;
+}
+
+.text-blanco {
+    color: var(--van-secundario-v3);
+}
+
+.overlay-oscuro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text-shadow-lg {
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+}

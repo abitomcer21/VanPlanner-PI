@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VanPlanner - Inicio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/config/tailwind-config.js"></script>
+  <link rel="stylesheet" href="../dist/output.css">
+
+  <!-- CSS Personalizado -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body class="page-index min-h-screen flex flex-col">
+
+  <div class="flex-grow flex flex-col justify-center items-center text-center p-4 relative z-10">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="font-titulo text-4xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 text-blanco text-shadow-lg">
+        Bienvenido a VanPlanner
+      </h1>
+
+      <p class="font-texto text-lg md:text-2xl lg:text-3xl mb-8 md:mb-12 text-blanco text-shadow px-4">
+        ESTÁS A UN PASO DE EMPEZAR TU NUEVA AVENTURA<br class="hidden md:block">
+        ¡PLANIFICA TU PRÓXIMO VIAJE CON NOSOTROS!
+      </p>
+
+      <a href="inicioSesion.html"
+        class="inline-block bg-van-primario-v1 hover:bg-van-primario-v2 text-van-secundario-v3 font-titulo font-bold py-3 px-8 md:py-4 md:px-12 text-xl md:text-2xl rounded-xl transition duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl">
+        INICIA SESIÓN
+      </a>
+
+      <div class="mt-8">
+        <p class="font-texto text-lg text-blanco text-shadow">
+          ¿No tienes cuenta?
+          <a href="registro.html" class="text-van-primario-v1 font-semibold hover:underline">
+            Regístrate gratis
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-container"></div>
+  
+</body>
+
+</html>

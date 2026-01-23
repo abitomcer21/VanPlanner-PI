@@ -1,0 +1,85 @@
+
+body.page-login {
+    background: url('../../assets/images/fotoFondoInicioSesion.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+}
+
+body.page-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
+
+body.page-login > * {
+    position: relative;
+    z-index: 1;
+}
+
+.formulario-login {
+    background-color: #FFFFFF;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.formulario-login.transparente {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.formulario-login.van-bg {
+    background-color: var(--van-secundario-v1); 
+    border: 2px solid var(--van-primario-v1); 
+}
+
+.login-header {
+    background-color: rgba(47, 49, 49, 0.9); 
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-footer {
+    background-color: rgba(47, 49, 49, 0.9);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.texto-sobre-imagen {
+    color: #FFFFFF;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.icono-social {
+    transition: all 0.3s ease;
+}
+
+.icono-social:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .login-header .container {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .login-header a[class*="md:absolute"] {
+        position: static !important;
+    }
+    
+    .formulario-login {
+        margin: 0 1rem;
+        padding: 1.5rem;
+    }
+}

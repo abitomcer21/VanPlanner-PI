@@ -1,0 +1,84 @@
+
+.van-header {
+    background-color: var(--van-secundario-v2);
+    padding: 0.75rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.van-nav-link {
+    color: var(--van-secundario-v3);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: color 0.3s ease;
+}
+
+.van-nav-link:hover {
+    color: var(--van-primario-v1);
+}
+
+.van-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.van-logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--van-secundario-v3);
+}
+
+/* Footer */
+.van-footer {
+    background-color: var(--van-secundario-v2);
+    color: var(--van-secundario-v3);
+    padding: 1rem 0;
+    margin-top: 3rem;
+}
+
+.footer-link {
+    color: var(--van-secundario-v3);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--van-primario-v1);
+}
+
+.van-card {
+    background-color: var(--van-secundario-v3);
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.btn-van {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-van:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-van-primary {
+    background-color: var(--van-primario-v1);
+    color: var(--van-secundario-v3);
+}
+
+.btn-van-primary:hover:not(:disabled) {
+    background-color: var(--van-primario-v2);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(249, 186, 50, 0.3);
+}
