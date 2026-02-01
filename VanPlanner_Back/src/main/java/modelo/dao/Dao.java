@@ -4,7 +4,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Parada;
 import modelo.Usuario;
+import modelo.Vehiculo;
+import modelo.Viaje;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -14,16 +17,16 @@ import java.sql.SQLException;
 
 /**
  * <p>Clase Singleton Dao. Implementa el acceso a la base de datos para ejecutar
- * las operaciones de inserción, modificación y borrado de registros.</p>
- * <a href="#">Visita mi web para más información</a>
+ * las operaciones de inserciï¿½n, modificaciï¿½n y borrado de registros.</p>
+ * <a href="#">Visita mi web para mï¿½s informaciï¿½n</a>
  * @version 1.0
  * @author Yo mismo
  */
 public class Dao {
-	// Instancia única de la clase Dao para poder aplicar el patrón Singleton.
+	// Instancia ï¿½nica de la clase Dao para poder aplicar el patrï¿½n Singleton.
 	private static Dao instance;
 	
-	// La conexión para la base de datos.
+	// La conexiï¿½n para la base de datos.
 	private static Connection connection = null;
 	
 	// El statement.
@@ -33,17 +36,17 @@ public class Dao {
 	private static PreparedStatement preparedStatement;
 	
 	/*
-	 * Método constructor privado.
-	 * Permite implementar el patrón Singleton.
+	 * Mï¿½todo constructor privado.
+	 * Permite implementar el patrï¿½n Singleton.
 	 */
 	private Dao() {
 		super();
 	}
 	
 	/**
-	 * Método sincronizado privado.
-	 * Permite implementar el patrón Singleton.
-	 * Ver métodos synchronized {@link docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html}
+	 * Mï¿½todo sincronizado privado.
+	 * Permite implementar el patrï¿½n Singleton.
+	 * Ver mï¿½todos synchronized {@link docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html}
 	 * @since 1.0
 	 */
     private synchronized static void crearInstancia() {
@@ -54,7 +57,7 @@ public class Dao {
  
 	/**
 	 * Obtener la instancia de la clase Dao.
-	 * @return instance La instancia única del objeto de la clase Dao.
+	 * @return instance La instancia ï¿½nica del objeto de la clase Dao.
 	 * @since 1.0
 	 */
     public static Dao getInstancia() {
@@ -64,10 +67,10 @@ public class Dao {
     } 
 
 	/**
-	 * Obtener el número de registros almacenados en la tabla de usuarios.
-	 * @return n El número de registros almacenados en la tabla de usuarios.
+	 * Obtener el nï¿½mero de registros almacenados en la tabla de usuarios.
+	 * @return n El nï¿½mero de registros almacenados en la tabla de usuarios.
 	 * @since 1.0
-	 * @throws java.sql.SQLException Si hay algún error al recuperar el número de usuarios de la tabla de usuarios.
+	 * @throws java.sql.SQLException Si hay algï¿½n error al recuperar el nï¿½mero de usuarios de la tabla de usuarios.
 	 */
 	public int getNumeroUsuarios() throws SQLException {
 		int num = 0;
@@ -110,9 +113,9 @@ public class Dao {
 	}
 
 	/**
-	 * Buscar un usuario por el identificador y la contraseña.
+	 * Buscar un usuario por el identificador y la contraseï¿½a.
 	 * @param email El identificador del usuario.
-	 * @param password La contraseña del usuario.
+	 * @param password La contraseï¿½a del usuario.
 	 * @return usuario El usuario encontrado en la base de datos, null en caso contrario.
 	 * @since 1.0
 	 */
@@ -143,8 +146,8 @@ public class Dao {
 	
 	/**
 	 * Insertar un nuevo usuario en la base de datos
-	 * @param usuario El usuario a añadir en la tabla de usuarios.			        
-	 * @return 1 Si la actualización se ha realizado correctamente, 0 si no hay actualizaciones pendientes de realizar.
+	 * @param usuario El usuario a aï¿½adir en la tabla de usuarios.			        
+	 * @return 1 Si la actualizaciï¿½n se ha realizado correctamente, 0 si no hay actualizaciones pendientes de realizar.
 	 * @see modelo.bean.Usuario
 	 * @since 1.0
 	 */
@@ -171,4 +174,94 @@ public class Dao {
 		}
      	return 0;	    
 	}
-}
+	
+	public int anyadirParada(Parada parada){
+ 		String sql = "insert into paradas (viaje_id, nombre_lugar, direccion, latitud, longitud, tipo) values (?,?,?,?,?,?);";
+    	try {
+    		preparedStatement = JdbcConnection.getConnection().prepareStatement(sql);
+    		preparedStatement.setInt(1, 1);
+    	    preparedStatement.setString(2, parada.getNombre());				        	  
+    	    preparedStatement.setString(3, parada.getDireccion());
+    	    preparedStatement.setFloat(4, parada.getLat());
+    	    preparedStatement.setFloat(5, parada.getLng());
+    	    preparedStatement.setString(6, parada.getTipo());
+    	    preparedStatement.executeUpdate();
+    	    preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 1;
+		}
+     	return 0;	    
+	}
+	
+	public ArrayList <Viaje> obtenerViajesUsuario(int usuario){
+		String sql = "v=?";
+		
+		ArrayList <Viaje> viajesUsuario = new ArrayList();
+        
+	    try{
+    		preparedStatement = JdbcConnection.getConnection().prepareStatement(sql);
+    	    preparedStatement.setInt(1, usuario);  
+    	    
+    		ResultSet rs = preparedStatement.executeQuery();
+    		
+    		
+    		 while(rs.next()) {
+    			 
+    			 Viaje viaje = new Viaje();
+    			 
+    			 viaje.setUsuario_id(usuario);
+    			 viaje.setVehiculo_id(rs.getInt("vehiculo_id"));
+    			 viaje.setNombre_viaje(rs.getString("nombre_viaje"));
+    			 viaje.setDescripcion(rs.getString("descripcion"));
+    			 viaje.setOrigen(rs.getString("origen"));
+    			 viaje.setDestino(rs.getString("destino"));
+    			 viaje.setFecha_inicio(rs.getDate("fecha_inicio"));
+    			 viaje.setFecha_fin(rs.getDate("fecha_fin"));
+    			 viaje.setDistancia_total(rs.getFloat("distancia_total"));
+    			 viaje.setPresupuesto_estimado(rs.getFloat("presupuesto_estimado"));
+    			 viaje.setPresupuesto_real(rs.getFloat("presupuesto_real"));
+    			 viaje.setEstado(rs.getString("estado"));
+    			 
+    		 }
+    		 
+	    }catch(SQLException e){
+	    	e.printStackTrace();	    	
+	    }    
+	    
+	    return viajesUsuario;
+	}
+	
+	/**
+	 * Obtener todos los vehÃ­culos de la base de datos.
+	 * @return vehiculos Lista de vehÃ­culos con los registros almacenados en la tabla de vehiculos.
+	 * @since 1.0
+	 */
+	public ArrayList<Vehiculo> obtenerVehiculos(){
+		ArrayList<Vehiculo> vehiculos = new ArrayList();
+		String sql = "select * from vehiculos";
+		
+		try{
+			preparedStatement = JdbcConnection.getConnection().prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Vehiculo vehiculo = new Vehiculo();
+				vehiculo.setId_vehiculo(rs.getInt("id_vehiculo"));
+				vehiculo.setMatricula(rs.getString("matricula"));
+				vehiculo.setMarca(rs.getString("marca"));
+				vehiculo.setModelo(rs.getString("modelo"));
+				vehiculo.setAnyo(rs.getInt("anyo"));
+				vehiculo.setTipo_combustible(rs.getString("tipo_combustible"));
+				vehiculo.setConsumo_medio(rs.getFloat("consumo_medio"));
+				vehiculo.setCapacidad_pasajeros(rs.getInt("capacidad_pasajeros"));
+				vehiculo.setCapacidad_carga(rs.getInt("capacidad_carga"));
+				vehiculos.add(vehiculo);
+			}
+			preparedStatement.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return vehiculos;
+	}

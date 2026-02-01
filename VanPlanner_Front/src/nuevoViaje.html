@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -19,36 +19,46 @@
     <!-- Otros estilos -->
     <link rel="stylesheet" href="../dist/output.css">
     <link rel="stylesheet" href="./css/paginas/nuevoViaje.css">
+    <link rel="stylesheet" href="./css/calendar.css">
+
 
 
     <script src="js/pages/verTodos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+    <script async defer loading="async"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6iJUYJYphmPe4e-mcGDhppqLSud9J0vY&callback=initMap&libraries=places">
+        </script>
     <script src="js/components/loader.js"></script>
+    <script src="js/components/calendar.js"></script>
+    <script src="js/components/mapa.js"></script>
+
+
 
 </head>
 
 <body class="min-h-screen bg-gray-100 overflow-hidden">
     <div class="min-h-screen flex flex-col">
-        <header class="bg-van-primario-v2 py-1 shadow-md flex-shrink-0">
+        <header class="bg-van-primario-v2 py-0.5 shadow-md">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-3 items-center">
                     <div class="justify-self-start"></div>
 
-                    <div class="justify-self-center flex items-center space-x-4 md:space-x-8 lg:space-x-12">
-                        <a href="index.html"
-                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                    <div class="justify-self-center flex items-center space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8">
+                        <a href="panelIniciado.html"
+                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-[10px] sm:text-xs md:text-sm">
                             INICIO
                         </a>
 
-                        <a href="index.html" class="-mt-2 -mb-3">
+                        <a href="panelIniciado.html" class="-my-1">
                             <div class="flex items-center">
                                 <img src="assets/images/logoAplicacion.png" alt="VanPlanner"
-                                    class="h-20 w-auto md:h-28">
+                                    class="h-12 w-auto sm:h-16 md:h-20 lg:h-24">
                             </div>
                         </a>
 
                         <a href="nuevoViaje.html"
-                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-[10px] sm:text-xs md:text-sm">
                             NUEVO VIAJE
                         </a>
                     </div>
@@ -56,10 +66,12 @@
                     <div class="justify-self-end">
                         <el-dropdown class="inline-block">
                             <button
-                                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-van-primario-v1 px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">
-                                ¡Hola, <span id="nombreUsuario">{nombre}!</span>
+                                class="inline-flex w-full justify-center gap-x-1 rounded-md bg-van-primario-v1 px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">
+                                <span class="hidden sm:inline">¡Hola,</span>
+                                <span id="nombreUsuario" class="hidden sm:inline">{nombre}!</span>
+                                <i class="fas fa-user sm:hidden text-xs"></i>
                                 <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
-                                    class="-mr-1 size-5 text-gray-400">
+                                    class="-mr-1 size-4 sm:size-5 text-gray-400">
                                     <path
                                         d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
                                         clip-rule="evenodd" fill-rule="evenodd" />
@@ -67,30 +79,27 @@
                             </button>
                             <el-menu anchor="bottom end" popover
                                 class="w-56 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
-                                <div class="py-1">
-                                    <a href="#"
-                                        class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
-                                    </a>
+                                <a href="perfilUser.html"
+                                    class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
+                                </a>
 
-                                    <form action="#" method="POST">
-                                        <button type="submit"
-                                            class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
-                                            sesión</button>
-                                    </form>
-                                </div>
+                                <form action="index.html">
+                                    <button type="submit"
+                                        class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
+                                        sesión</button>
+                                </form>
                             </el-menu>
                         </el-dropdown>
                     </div>
                 </div>
             </div>
         </header>
-
         <main class="flex-1 overflow-hidden">
             <div class="h-full w-full px-2 sm:px-4 lg:px-8 xl:px-12 2xl:px-16 py-2 sm:py-4">
                 <div class="h-full grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4">
 
                     <div class="lg:col-span-3 h-full flex flex-col bg-blue-50 rounded-xl shadow-md">
-                        <div class="p-4 border-b border-blue-100">
+                        <div class="p-3 border-b border-blue-100">
                             <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center">
                                 <i class="fas fa-cog text-blue-600 mr-2"></i> CONFIGURACIÓN
                             </h2>
@@ -122,8 +131,10 @@
 
                                     <button
                                         class="mt-2 w-full bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium py-2 px-3 rounded-lg flex items-center justify-center transition duration-200 text-sm">
-                                        <i class="fas fa-plus-circle mr-2"></i> Añadir Parada
+                                        <i class="fas fa-plus-circle mr-2"></i> Crear viaje
                                     </button>
+
+                                    
                                 </div>
                             </div>
 
@@ -144,8 +155,7 @@
                                             </div>
                                         </div>
                                         <div class="text-xs">
-                                            <p class="text-gray-600 mb-1">Consumo: <span
-                                                    class="font-medium"></span></p>
+                                            <p class="text-gray-600 mb-1">Consumo: <span class="font-medium"></span></p>
                                             <div class="w-full bg-gray-200 rounded-full h-1.5">
                                                 <div class="bg-green-500 h-1.5 rounded-full" style="width: 65%"></div>
                                             </div>
@@ -206,120 +216,135 @@
                     </div>
 
                     <div class="lg:col-span-6 h-full flex flex-col space-y-2 sm:space-y-4">
-                        <div
-                            class="flex-1 min-h-[200px] sm:min-h-[300px] bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
-                            <div class="p-4 border-b border-gray-200">
-                                <h3 class="font-semibold text-gray-700 flex items-center">
-                                    <i class="fas fa-map-marked-alt text-green-600 mr-2"></i> MAPA DEL VIAJE
-                                </h3>
-                            </div>
-                            <div id="map-container" class="flex-1 bg-gray-200 flex items-center justify-center">
-                                <div class="text-center p-4">
-                                    <i class="fas fa-map text-gray-400 text-3xl sm:text-4xl mb-2 sm:mb-3"></i>
-                                    <p class="text-gray-500 font-medium text-sm sm:text-base">Mapa de Google Maps</p>
-                                    <p class="text-gray-400 text-xs sm:text-sm mt-1">API se integrará aquí</p>
+                        <!--Mapa - 2/3 de la altura-->
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
+                            style="height: 66.666%;">
+                            <div class="p-3 sm:p-4 border-b border-gray-200">
+                                <div
+                                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                                    <h3 class="font-semibold text-gray-700 flex items-center text-sm sm:text-base">
+                                        <i class="fas fa-map-marked-alt text-green-600 mr-2"></i> MAPA DEL VIAJE
+                                    </h3>
+
+                                    <!-- Barra de búsqueda compacta -->
+                                    <div class="relative w-full sm:w-64">
+                                        <input id="search-input" type="text" placeholder="Buscar lugares..."
+                                            class="w-full p-2 pl-10 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                                        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div id="map" class="flex-1 bg-gray-200"></div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 min-h-[150px]">
-                            <div class="bg-white rounded-xl shadow-md p-4 flex flex-col">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h3 class="font-semibold text-gray-700 flex items-center text-sm">
-                                        <i class="fas fa-calendar-alt text-purple-600 mr-2"></i> CALENDARIO
-                                    </h3>
-                                    <div class="flex space-x-1">
-                                        <button class="p-1 hover:bg-gray-100 rounded">
-                                            <i class="fas fa-chevron-left text-gray-600 text-xs"></i>
-                                        </button>
-                                        <span class="font-medium text-gray-700 px-1 text-sm">Sep 2024</span>
-                                        <button class="p-1 hover:bg-gray-100 rounded">
-                                            <i class="fas fa-chevron-right text-gray-600 text-xs"></i>
-                                        </button>
-                                    </div>
-                                </div>
 
-                                <div class="grid grid-cols-7 gap-1 mb-2">
-                                    <div class="text-center font-medium text-gray-500 text-xs">L</div>
-                                    <div class="text-center font-medium text-gray-500 text-xs">M</div>
-                                    <div class="text-center font-medium text-gray-500 text-xs">X</div>
-                                    <div class="text-center font-medium text-gray-500 text-xs">J</div>
-                                    <div class="text-center font-medium text-gray-500 text-xs">V</div>
-                                    <div class="text-center font-medium text-gray-500 text-xs">S</div>
-                                    <div class="text-center font-medium text-gray-500 text-xs">D</div>
-                                </div>
-
-                                <div class="grid grid-cols-7 gap-1 flex-1">
-                                    <div class="text-center p-1 text-gray-400 text-xs">26</div>
-                                    <div class="text-center p-1 text-gray-400 text-xs">27</div>
-                                    <div class="text-center p-1 text-gray-400 text-xs">28</div>
-                                    <div class="text-center p-1 text-gray-400 text-xs">29</div>
-                                    <div class="text-center p-1 text-gray-400 text-xs">30</div>
-                                    <div class="text-center p-1 text-gray-400 text-xs">31</div>
-                                    <div class="text-center p-1 bg-blue-50 rounded border border-blue-200 text-xs">
-                                        <span class="font-medium text-blue-700">1</span>
-                                        <div class="text-xs text-blue-500 mt-1">D1</div>
-                                    </div>
-                                </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4" style="height: 33.333%;">
+                            <!-- Calendario -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                                <div id='calendar'
+                                    class="h-full p-1 sm:p-2 overflow-auto custom-scrollbar text-[8px] sm:text-[10px]"
+                                    style="font-size: 0.6rem;"></div>
                             </div>
 
-                            <div class="bg-white rounded-xl shadow-md p-4 flex flex-col">
+                            <!-- Puntos de interés-->
+                            <div class="bg-white rounded-xl shadow-md p-3 sm:p-4 flex flex-col overflow-hidden">
                                 <div class="flex justify-between items-center mb-3">
                                     <h3 class="font-semibold text-gray-700 flex items-center text-sm">
                                         <i class="fas fa-map-pin text-red-600 mr-2"></i> PUNTOS DE INTERÉS
                                     </h3>
-                                    <button
-                                        class="bg-red-100 hover:bg-red-200 text-red-700 font-medium py-1.5 px-3 rounded-lg flex items-center transition duration-200 text-xs">
-                                        <i class="fas fa-plus mr-1"></i> Añadir
-                                    </button>
                                 </div>
 
+                                <!-- CONTENEDOR CON SCROLL -->
                                 <div class="space-y-2 flex-1 overflow-y-auto custom-scrollbar">
-                                    <div
-                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm">
+                                    <!-- HOTEL -->
+                                    <div id="categoria-hotel"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
                                         <div
-                                            class="h-8 w-8 bg-red-100 rounded-full flex items-center justify-center mr-2">
-                                            <i class="fas fa-landmark text-red-600 text-xs"></i>
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-purple-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-bed text-purple-600 text-xs"></i>
                                         </div>
-                                        <div class="flex-1 truncate">
-                                            <p class="font-medium text-gray-800 truncate"></p>
-                                            <p class="text-xs text-gray-500 truncate"></p>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Hoteles</p>
                                         </div>
                                     </div>
 
-                                    <div
-                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm">
+                                    <!-- RESTAURANTE -->
+                                    <div id="categoria-restaurante"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
                                         <div
-                                            class="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-blue-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
                                             <i class="fas fa-utensils text-blue-600 text-xs"></i>
                                         </div>
-                                        <div class="flex-1 truncate">
-                                            <p class="font-medium text-gray-800 truncate"></p>
-                                            <p class="text-xs text-gray-500 truncate"></p>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Restaurantes</p>
                                         </div>
                                     </div>
 
-                                    <div
-                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm">
+                                    <!-- MONUMENTO -->
+                                    <div id="categoria-monumento"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
                                         <div
-                                            class="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-red-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-landmark text-red-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Monumentos</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- NATURALEZA -->
+                                    <div id="categoria-naturaleza"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
+                                        <div
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-green-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
                                             <i class="fas fa-tree text-green-600 text-xs"></i>
                                         </div>
-                                        <div class="flex-1 truncate">
-                                            <p class="font-medium text-gray-800 truncate"></p>
-                                            <p class="text-xs text-gray-500 truncate"></p>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Naturaleza</p>
                                         </div>
                                     </div>
 
-                                    <div
-                                        class="flex items-center justify-center p-2 border border-dashed border-gray-300 rounded-lg text-gray-400 hover:bg-gray-50 cursor-pointer text-xs">
-                                        <i class="fas fa-plus mr-1"></i> Añadir punto
+                                    <!-- COMPRAS -->
+                                    <div id="categoria-compras"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
+                                        <div
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-yellow-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-shopping-bag text-yellow-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Compras</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- TRANSPORTE -->
+                                    <div id="categoria-transporte"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
+                                        <div
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-indigo-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-bus text-indigo-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Transporte</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- OTROS -->
+                                    <div id="categoria-otros"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
+                                        <div
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-gray-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-map-marker-alt text-gray-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Otros</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                     <div class="lg:col-span-3 h-full flex flex-col space-y-2 sm:space-y-4">
                         <div class="flex-1 min-h-[200px] bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                             <div class="p-4 border-b border-gray-200">
@@ -327,10 +352,7 @@
                                     <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center">
                                         <i class="fas fa-route text-green-600 mr-2"></i> ITINERARIO
                                     </h2>
-                                    <button
-                                        class="bg-green-100 hover:bg-green-200 text-green-700 font-medium py-2 px-3 rounded-lg flex items-center transition duration-200 text-sm">
-                                        <i class="fas fa-plus mr-2"></i> Añadir Día
-                                    </button>
+
                                 </div>
                             </div>
 
@@ -339,7 +361,8 @@
                                     <div class="border-l-3 border-blue-500 pl-3 py-2 bg-blue-50 rounded-r-lg">
                                         <div class="flex justify-between items-center">
                                             <h3 class="font-semibold text-gray-800 text-sm">DÍA 1</h3>
-                                            <span class="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded"></span>
+                                            <span
+                                                class="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded"></span>
                                         </div>
                                         <p class="text-xs text-gray-600 mt-1 truncate">
                                         </p>
@@ -352,20 +375,22 @@
                                     <div class="border-l-3 border-green-500 pl-3 py-2 bg-green-50 rounded-r-lg">
                                         <div class="flex justify-between items-center">
                                             <h3 class="font-semibold text-gray-800 text-sm">DÍA 2</h3>
-                                            <span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded"></span>
+                                            <span
+                                                class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded"></span>
                                         </div>
                                         <p class="text-xs text-gray-600 mt-1 truncate">
-                                            Córdoba</p>
+                                        </p>
                                         <div class="mt-1 flex items-center text-xs text-gray-500">
                                             <i class="fas fa-clock mr-1 text-xs"></i>
-                                            <span>9:00 - 19:00</span>
+                                            <span></span>
                                         </div>
                                     </div>
 
                                     <div class="border-l-3 border-purple-500 pl-3 py-2 bg-purple-50 rounded-r-lg">
                                         <div class="flex justify-between items-center">
                                             <h3 class="font-semibold text-gray-800 text-sm">DÍA 3</h3>
-                                            <span class="text-xs bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded"></span>
+                                            <span
+                                                class="text-xs bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded"></span>
                                         </div>
                                         <p class="text-xs text-gray-600 mt-1 truncate"></p>
                                         <div class="mt-1 flex items-center text-xs text-gray-500">
@@ -377,7 +402,8 @@
                                     <div class="border-l-3 border-orange-500 pl-3 py-2 bg-orange-50 rounded-r-lg">
                                         <div class="flex justify-between items-center">
                                             <h3 class="font-semibold text-gray-800 text-sm">DÍA 4</h3>
-                                            <span class="text-xs bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded"></span>
+                                            <span
+                                                class="text-xs bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded"></span>
                                         </div>
                                         <p class="text-xs text-gray-600 mt-1 truncate"></p>
                                         <div class="mt-1 flex items-center text-xs text-gray-500">
@@ -396,11 +422,6 @@
                                             <i class="fas fa-clock mr-1 text-xs"></i>
                                             <span></span>
                                         </div>
-                                    </div>
-
-                                    <div
-                                        class="flex items-center justify-center p-2 border border-dashed border-gray-300 rounded-lg text-gray-400 hover:bg-gray-50 cursor-pointer text-xs">
-                                        <i class="fas fa-plus mr-1"></i> Añadir nuevo día
                                     </div>
                                 </div>
                             </div>
@@ -449,10 +470,7 @@
                                         </button>
                                     </div>
 
-                                    <div
-                                        class="flex items-center justify-center p-3 border border-dashed border-gray-300 rounded-lg text-gray-400 hover:bg-gray-50 cursor-pointer text-sm">
-                                        <i class="fas fa-user-plus mr-2"></i> Invitar colaborador
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

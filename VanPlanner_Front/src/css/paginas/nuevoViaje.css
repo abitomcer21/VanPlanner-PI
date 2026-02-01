@@ -1,4 +1,3 @@
-
 html, body {
     height: 100%;
     margin: 0;
@@ -251,3 +250,56 @@ div[class*="space-y-"] > div:last-child {
         min-height: 250px;
     }
 }
+
+/* Estilos para el calendario compacto */
+#calendar {
+    font-size: 0.6rem !important;
+}
+
+#calendar .fc-toolbar {
+    font-size: 0.65rem !important;
+    padding: 0.25rem !important;
+}
+
+#calendar .fc-toolbar-title {
+    font-size: 0.75rem !important;
+}
+
+#calendar .fc-button {
+    padding: 0.15rem 0.4rem !important;
+    font-size: 0.6rem !important;
+}
+
+#calendar .fc-col-header-cell {
+    padding: 0.2rem 0 !important;
+    font-size: 0.55rem !important;
+}
+
+#calendar .fc-daygrid-day {
+    font-size: 0.55rem !important;
+}
+
+#calendar .fc-daygrid-day-number {
+    padding: 0.1rem !important;
+    font-size: 0.6rem !important;
+}
+
+#calendar .fc-event {
+    font-size: 0.5rem !important;
+    padding: 0.1rem !important;
+}
+
+#calendar .fc-daygrid-day-frame {
+    min-height: 1.5rem !important;
+}
+
+@media (min-width: 640px) {
+    #calendar {
+        font-size: 0.7rem !important;
+    }
+    
+    #calendar .fc-toolbar-title {
+        font-size: 0.85rem !important;
+    }
+}
+

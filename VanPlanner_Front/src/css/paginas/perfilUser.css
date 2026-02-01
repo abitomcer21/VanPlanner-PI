@@ -1,0 +1,17 @@
+        /* Estilos para el scroll suave y secciones */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section-active {
+            color: #3b82f6;
+            background-color: #eff6ff;
+            border-left-color: #3b82f6;
+        }
+
+        /* Asegurar que el contenido tenga espacio para el menú lateral */
+        @media (min-width: 1024px) {
+            .content-with-sidebar {
+                margin-left: 16rem;
+            }
+        }

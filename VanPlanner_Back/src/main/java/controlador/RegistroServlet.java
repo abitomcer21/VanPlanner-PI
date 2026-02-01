@@ -23,10 +23,8 @@ import utils.ControllerUtils;
  */
 
 @SuppressWarnings("serial")
+
 @WebServlet("/RegistroServlet")
-
-
-
 public class RegistroServlet extends HttpServlet {
 	
 	/**
@@ -42,8 +40,6 @@ public class RegistroServlet extends HttpServlet {
     // GET: Muestra el formulario vacío para crear usuario
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        // Redirige al formulario JSP
-        request.getRequestDispatcher("/crearUsuario.jsp").forward(request, response);
     }
     
     /**

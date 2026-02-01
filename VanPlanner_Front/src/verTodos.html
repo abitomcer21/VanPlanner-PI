@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../dist/output.css">
     <link rel="stylesheet" href="css/paginas/verTodos.css">
+
     <script src="js/pages/verTodos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
     <script src="js/components/loader.js"></script>
@@ -32,12 +33,12 @@
                     <div class="justify-self-start"></div>
 
                     <div class="justify-self-center flex items-center space-x-4 md:space-x-8 lg:space-x-12">
-                        <a href="index.html"
+                        <a href="panelIniciado.html"
                             class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
                             INICIO
                         </a>
 
-                        <a href="index.html" class="-mt-2 -mb-3">
+                        <a href="panelIniciado.html" class="-mt-2 -mb-3">
                             <div class="flex items-center">
                                 <img src="assets/images/logoAplicacion.png" alt="VanPlanner"
                                     class="h-20 w-auto md:h-28">
@@ -65,17 +66,15 @@
                             </button>
                             <el-menu anchor="bottom end" popover
                                 class="w-56 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
-                                <div class="py-1">
-                                    <a href="#"
-                                        class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
-                                    </a>
+                                <a href="perfilUser.html"
+                                    class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
+                                </a>
 
-                                    <form action="#" method="POST">
-                                        <button type="submit"
-                                            class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
-                                            sesión</button>
-                                    </form>
-                                </div>
+                                <form action="index.html">
+                                    <button type="submit"
+                                        class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
+                                        sesión</button>
+                                </form>
                             </el-menu>
                         </el-dropdown>
                     </div>

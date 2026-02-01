@@ -13,7 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/abijo/OneDrive - Conselleria d&apos;Educació/2 DAW/6. Projecte intermodular/2 EVALUACION/VanPlannerBack/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.45-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abijo/OneDrive - Conselleria d&apos;Educació/2 DAW/6. Projecte intermodular/2 EVALUACION/Repositorio/VanPlanner_Back/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.1.45-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abijo/Downloads/gson-2.10.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

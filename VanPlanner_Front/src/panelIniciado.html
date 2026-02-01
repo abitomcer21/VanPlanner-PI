@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>panel iniciado - van planner</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/config/tailwind-config.js"></script>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Otros estilos -->
+    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="./css/paginas/nuevoViaje.css">
+
+    <script src="js/pages/verTodos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6iJUYJYphmPe4e-mcGDhppqLSud9J0vY&callback=initMap">
+        </script>
+
+    <script src="js/components/loader.js"></script>
+    <script src="js/components/mapa.js"></script>
+
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <header class="bg-van-primario-v2 py-1 shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-3 items-center">
+                <div class="justify-self-start"></div>
+
+                <div class="justify-self-center flex items-center space-x-4 md:space-x-8 lg:space-x-12">
+                    <a href="verTodos.html"
+                        class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                        INICIO
+                    </a>
+
+                    <a href="verTodos.html" class="-mt-2 -mb-3">
+                        <div class="flex items-center">
+                            <img src="assets/images/logoAplicacion.png" alt="VanPlanner" class="h-20 w-auto md:h-28">
+                        </div>
+                    </a>
+
+                    <a href="nuevoViaje.html"
+                        class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                        NUEVO VIAJE
+                    </a>
+                </div>
+
+                <div class="justify-self-end">
+                    <el-dropdown class="inline-block">
+                        <button
+                            class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-van-primario-v1 px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">
+                            ¡Hola, <span id="nombreUsuario">{nombre}!</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
+                                class="-mr-1 size-5 text-gray-400">
+                                <path
+                                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                    clip-rule="evenodd" fill-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <el-menu anchor="bottom end" popover
+                            class="w-56 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                            <div class="py-1">
+                                <a href="perfilUser.html"
+                                    class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
+                                </a>
+
+                                <form action="index.html">
+                                    <button type="submit"
+                                        class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
+                                        sesión</button>
+                                </form>
+                            </div>
+                        </el-menu>
+                    </el-dropdown>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 flex flex-col lg:flex-row min-h-0">
+        <!-- Columna Izquierda -->
+        <div class="lg:w-1/3 w-full flex flex-col p-5 lg:overflow-y-auto">
+            <!-- Cartel Próximo Viaje -->
+            <div
+                class="bg-gradient-to-l from-van-primario-v1 to-van-primario-v text-white rounded-xl p-4 mb-4 shadow-md flex-shrink-0">
+                <h2 class="text-sm font-medium text-black mb-2">PROXIMO VIAJE</h2>
+                <h3 class="text-black font-bold mb-2">Viaje Holanda</h3>
+                <p class="text-black mb-4">Burriana → Holanda · 25 - 31 DIC</p>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                    <div class="text-black font-semibold">1300km · 2 personas</div>
+                    <div class="flex gap-2">
+                        <button class="bg-van-primario-v2 text-black px-3 py-1 rounded-full text-sm">Compartir</button>
+                        <a href="verViajeEspecifico.html"
+                            class="bg-van-primario-v2 text-black px-3 py-1 rounded-full text-sm">Abrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">TODOS TUS VIAJES</h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 auto-rows-fr">
+                    <!-- Tarjeta 1 - TOLEDO -->
+                    <div
+                        class="bg-van-primario-v2 rounded-lg p-3 shadow-sm border border-gray-200 flex flex-col min-h-[120px]">
+                        <div class="font-bold text-white text-center truncate mb-1">TOLEDO</div>
+                        <div class="font-medium text-white text-center text-sm mb-1">del 08 al 16</div>
+                        <div class="text-white font-medium text-center text-sm mb-3">Diciembre</div>
+                        <a href="editarViaje.html"
+                            class="bg-van-primario-v1 text-black rounded-lg py-1 px-2 text-xs hover:bg-black transition-colors flex items-center justify-center gap-x-1 mt-auto">
+                            <i class="fas fa-edit text-xs"></i>
+                            editar
+                        </a>
+                    </div>
+
+                    <div
+                        class="bg-van-primario-v2 rounded-lg p-3 shadow-sm border border-gray-200 flex flex-col min-h-[120px]">
+                        <div class="font-bold text-white text-center truncate mb-1">RUTA DE MONTAÑA</div>
+                        <div class="font-medium text-white text-center text-sm mb-1">Día 18</div>
+                        <div class="text-white font-medium text-center text-sm mb-3">Diciembre</div>
+                        <a href="editarViaje.html"
+                            class="bg-van-primario-v1 text-black rounded-lg py-1 px-2 text-xs hover:bg-black transition-colors flex items-center justify-center gap-x-1 mt-auto">
+                            <i class="fas fa-edit text-xs"></i>
+                            editar
+                        </a>
+                    </div>
+
+                    <div
+                        class="bg-van-primario-v2 rounded-lg p-3 shadow-sm border border-gray-200 flex flex-col min-h-[120px]">
+                        <div class="font-bold text-white text-center truncate mb-1">BEZIERS</div>
+                        <div class="font-medium text-white text-center text-sm mb-1">del 28 al 31</div>
+                        <div class="text-white font-medium text-center text-sm mb-3">Diciembre</div>
+                        <a href="editarViaje.html"
+                            class="bg-van-primario-v1 text-black rounded-lg py-1 px-2 text-xs hover:bg-black transition-colors flex items-center justify-center gap-x-1 mt-auto">
+                            <i class="fas fa-edit text-xs"></i>
+                            editar
+                        </a>
+                    </div>
+                    <div
+                        class="bg-van-primario-v2 rounded-lg p-3 shadow-sm border border-gray-200 flex flex-col min-h-[120px]">
+                        <div class="font-bold text-white text-center truncate mb-1">CARRASCA</div>
+                        <div class="font-medium text-white text-center text-sm mb-1">del 10 al 18</div>
+                        <div class="text-white font-medium text-center text-sm mb-3">Enero</div>
+                        <a href="editarViaje.html"
+                            class="bg-van-primario-v1 text-black rounded-lg py-1 px-2 text-xs hover:bg-black transition-colors flex items-center justify-center gap-x-1 mt-auto">
+                            <i class="fas fa-edit text-xs"></i>
+                            editar
+                        </a>
+                    </div>
+
+                    <div
+                        class="bg-van-primario-v2 rounded-lg p-3 shadow-sm border border-gray-200 flex flex-col min-h-[120px]">
+                        <div class="font-bold text-white text-center truncate mb-1">TOLEDO</div>
+                        <div class="font-medium text-white text-center text-sm mb-1">del 01 al 10</div>
+                        <div class="text-white font-medium text-center text-sm mb-3">Febrero</div>
+                        <a href="editarViaje.html"
+                            class="bg-van-primario-v1 text-black rounded-lg py-1 px-2 text-xs hover:bg-black transition-colors flex items-center justify-center gap-x-1 mt-auto">
+                            <i class="fas fa-edit text-xs"></i>
+                            editar
+                        </a>
+                    </div>
+
+                    <!-- Tarjeta 6 - MONTAÑA -->
+                    <div
+                        class="bg-van-primario-v2 rounded-lg p-3 shadow-sm border border-gray-200 flex flex-col min-h-[120px]">
+                        <div class="font-bold text-white text-center truncate mb-1">RUTA DE MONTAÑA</div>
+                        <div class="font-medium text-white text-center text-sm mb-1">Día 12</div>
+                        <div class="text-white font-medium text-center text-sm mb-3">Febrero</div>
+                        <a href="editarViaje.html"
+                            class="bg-van-primario-v1 text-black rounded-lg py-1 px-2 text-xs hover:bg-black transition-colors flex items-center justify-center gap-x-1 mt-auto">
+                            <i class="fas fa-edit text-xs"></i>
+                            editar
+                        </a>
+                    </div>
+
+                    <!-- Tarjeta 7 - BEZIERS -->
+                    <div
+                        class="bg-van-primario-v2 rounded-lg p-3 shadow-sm border border-gray-200 flex flex-col min-h-[120px]">
+                        <div class="font-bold text-white text-center truncate mb-1">PARÍS</div>
+                        <div class="font-medium text-white text-center text-sm mb-1">del 03 al 09</div>
+                        <div class="text-white font-medium text-center text-sm mb-3">Marzo</div>
+                        <a href="editarViaje.html"
+                            class="bg-van-primario-v1 text-black rounded-lg py-1 px-2 text-xs hover:bg-black transition-colors flex items-center justify-center gap-x-1 mt-auto">
+                            <i class="fas fa-edit text-xs"></i>
+                            editar
+                        </a>
+                    </div>
+
+                    <!-- Botones especiales -->
+                    <div class="flex flex-col gap-3 col-span-1 sm:col-span-2 lg:col-span-1">
+                        <!-- Botón NUEVO VIAJE -->
+                        <a href="./nuevoViaje.html"
+                            class="bg-van-primario-v1 text-white rounded-lg py-3 px-4 font-medium hover:bg-black transition-colors flex items-center justify-center gap-2 min-h-[60px]">
+                            <i class="fas fa-plus"></i>
+                            NUEVO VIAJE
+                        </a>
+
+                        <!-- Botón VER TODOS -->
+                        <a href="./verTodos.html"
+                            class="bg-van-primario-v2 text-white rounded-lg py-3 px-4 font-medium hover:bg-gray-900 transition-colors flex items-center justify-center gap-2 min-h-[60px]">
+                            <i class="fas fa-list"></i>
+                            VER TODOS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna Central - MAPA -->
+        <div class="lg:w-1/3 w-full h-64 lg:h-auto lg:min-h-0">
+            <div
+                class="flex-1 min-h-[200px] sm:min-h-[300px] bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+
+                <div id="map" class="flex-1 bg-gray-200 flex items-center justify-center">
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna Derecha -->
+        <div class="lg:w-1/3 w-full bg-van-primario-v2 opacity-75 p-4 lg:p-8 lg:overflow-y-auto">
+            <div class="text-white">
+
+                <!-- RESUMEN -->
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200 mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">RESUMEN</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="text-center p-3">
+                            <div class="text-2xl font-bold text-gray-900">5</div>
+                            <div class="text-gray-500 text-sm">viajes</div>
+                        </div>
+                        <div class="text-center p-3">
+                            <div class="text-2xl font-bold text-gray-900">1200</div>
+                            <div class="text-gray-500 text-sm">km</div>
+                        </div>
+                        <div class="text-center p-3">
+                            <div class="text-2xl font-bold text-gray-900">3</div>
+                            <div class="text-gray-500 text-sm">activos</div>
+                        </div>
+                        <div class="text-center p-3">
+                            <div class="text-2xl font-bold text-gray-900">2</div>
+                            <div class="text-gray-500 text-sm">compartidos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECORDATORIOS -->
+                <div class="bg-white rounded-xl p-4 lg:p-6 shadow-sm border border-gray-200 mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">RECORDATORIOS</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-700 flex items-start">
+                            <span class="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3"></span>
+                            Reservar campings - costa
+                        </li>
+                        <li class="text-gray-700 flex items-start">
+                            <span class="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3"></span>
+                            Llenar deposito
+                        </li>
+                        <li class="text-gray-700 flex items-start">
+                            <span class="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3"></span>
+                            Revisar Itinerario Holanda
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ACCIÓN RÁPIDA -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-4 p-2">ACCIÓN RÁPIDA</h2>
+                    <div class="space-y-3">
+                        <button
+                            class="w-full bg-van-primario-v1 text-black rounded-lg py-3 font-semibold hover:bg-blue-50 transition-colors flex items-center justify-center gap-2">
+                            <i class="fas fa-share-alt"></i>
+                            Compartir viaje
+                        </button>
+                        <button
+                            class="w-full bg-van-primario-v1 text-black rounded-lg py-3 font-semibold hover:bg-blue-400 transition-colors flex items-center justify-center gap-2">
+                            <i class="fas fa-file-pdf"></i>
+                            Exportar pdf
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+</body>
+
+</html>

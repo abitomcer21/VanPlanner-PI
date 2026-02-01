@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil User - VanPlanner</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/config/tailwind-config.js"></script>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Otros estilos -->
+    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="./css/paginas/nuevoViaje.css">
+
+    <script src="js/pages/verTodos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+    <script src="js/components/loader.js"></script>
+    <link rel="stylesheet" href="./css/paginas/perfilUser.css">
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-van-primario-v2 py-1 shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-3 items-center">
+                <div class="justify-self-start">
+                    <button id="mobile-menu-button" class="lg:hidden text-van-secundario-v3">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="justify-self-center flex items-center space-x-4 md:space-x-8 lg:space-x-12">
+                    <a href="verTodos.html"
+                        class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                        INICIO
+                    </a>
+
+                    <a href="verTodos.html" class="-mt-2 -mb-3">
+                        <div class="flex items-center">
+                            <img src="assets/images/logoAplicacion.png" alt="VanPlanner" class="h-20 w-auto md:h-28">
+                        </div>
+                    </a>
+
+                    <a href="nuevoViaje.html"
+                        class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                        NUEVO VIAJE
+                    </a>
+                </div>
+
+                <div class="justify-self-end">
+                    <el-dropdown class="inline-block">
+                        <button
+                            class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-van-primario-v1 px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">
+                            ¡Hola, <span id="nombreUsuario">{nombre}!</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
+                                class="-mr-1 size-5 text-gray-400">
+                                <path
+                                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                    clip-rule="evenodd" fill-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <el-menu anchor="bottom end" popover
+                            class="w-56 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                            <div class="py-1">
+                                <a href="perfilUser.html"
+                                    class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
+                                </a>
+
+                                <form action="index.html">
+                                    <button type="submit"
+                                        class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
+                                        sesión</button>
+                                </form>
+                            </div>
+                        </el-menu>
+                    </el-dropdown>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <aside id="sidebar"
+        class="fixed left-0 top-10 h-screen w-auto bg-white shadow-lg z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 pt-20">
+        <div class="p-6">
+            <div class="text-center mb-8">
+                <h3 class="bg-van-primario-v1 font-bold text-lg text-gray-800">Abigail Tomás</h3>
+                <p class="text-gray-600 text-sm">Viajera Experta</p>
+            </div>
+
+            <!-- Navegación del perfil -->
+            <nav class="space-y-2">
+                <a href="#perfil" data-section="perfil"
+                    class="sidebar-item flex items-center p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition duration-200 border-l-4 border-transparent">
+                    <i class="fas fa-user-circle w-6 mr-3 text-gray-500"></i>
+                    <span class="font-medium">Mi Perfil</span>
+                </a>
+
+                <a href="#viajes" data-section="viajes"
+                    class="sidebar-item flex items-center p-3 rounded-lg hover:bg-green-50 hover:text-green-600 transition duration-200 border-l-4 border-transparent">
+                    <i class="fas fa-route w-6 mr-3 text-gray-500"></i>
+                    <span class="font-medium">Mis Viajes</span>
+                </a>
+
+                <a href="#preferencias" data-section="preferencias"
+                    class="sidebar-item flex items-center p-3 rounded-lg hover:bg-pink-50 hover:text-pink-600 transition duration-200 border-l-4 border-transparent">
+                    <i class="fas fa-heart w-6 mr-3 text-gray-500"></i>
+                    <span class="font-medium">Preferencias</span>
+                </a>
+
+                <a href="#vehiculo" data-section="vehiculo"
+                    class="sidebar-item flex items-center p-3 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition duration-200 border-l-4 border-transparent">
+                    <i class="fas fa-van-shuttle w-6 mr-3 text-gray-500"></i>
+                    <span class="font-medium">Mis vehículos</span>
+                </a>
+
+                <a href="#contacto" data-section="contacto"
+                    class="sidebar-item flex items-center p-3 rounded-lg hover:bg-purple-50 hover:text-purple-600 transition duration-200 border-l-4 border-transparent">
+                    <i class="fas fa-address-card w-6 mr-3 text-gray-500"></i>
+                    <span class="font-medium">Contacto</span>
+                </a>
+
+                <a href="#logros" data-section="logros"
+                    class="sidebar-item flex items-center p-3 rounded-lg hover:bg-amber-50 hover:text-amber-600 transition duration-200 border-l-4 border-transparent">
+                    <i class="fas fa-trophy w-6 mr-3 text-gray-500"></i>
+                    <span class="font-medium">Logros</span>
+                </a>
+            </nav>
+
+            <div class="mt-12 p-6 bg-gradient-to-r from-van-primario-v1 to-van-primario-v2 rounded-lg">
+                <h4 class="text-white font-bold mb-2">¿Nuevo viaje?</h4>
+                <p class="text-white/90 text-sm mb-3">Planifica tu próxima aventura</p>
+                <a href="nuevoViaje.html"
+                    class="block w-full bg-white text-van-primario-v1 text-center font-semibold py-2 rounded-lg hover:bg-gray-100 transition duration-200">
+                    <i class="fas fa-plus mr-2"></i>Crear Viaje
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="content-with-sidebar fixed right-0 top-0 bottom-0 left-0 lg:left-0 overflow-y-auto pt-28">
+        <div class="container mx-auto px-4 py-8">
+            <section id="perfil" class="section-content mb-12 scroll-mt-20">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">
+                        <i class="fas fa-user-circle mr-3 text-van-primario-v1"></i>Mi Perfil
+                    </h2>
+
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+
+                        <!-- Información principal -->
+                        <div class="flex-1">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                                <div>
+                                    <h3 class="text-3xl font-bold text-gray-800 mb-2" id="nombreUsuarioPerfil">Abigail
+                                        Tomás</h3>
+                                    <p class="text-gray-600 mb-4 flex items-center">
+                                        <i class="fas fa-map-marker-alt mr-2"></i>
+                                        <span id="ubicacionUsuario">Puzol, España</span>
+                                        <span class="mx-2">•</span>
+                                        <span class="text-van-primario-v1 font-semibold">Miembro desde Marzo 2023</span>
+                                    </p>
+                                </div>
+                                <button
+                                    class="mt-4 md:mt-0 bg-van-primario-v1 hover:bg-van-primario-v2 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md hover:-translate-y-1">
+                                    <i class="fas fa-edit mr-2"></i>Editar Perfil
+                                </button>
+                            </div>
+
+                            <!-- Estadísticas -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                                <div
+                                    class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-xl text-center border border-blue-200">
+                                    <p class="text-2xl font-bold text-blue-700">12</p>
+                                    <p class="text-gray-700 font-medium">Viajes Planificados</p>
+                                </div>
+                                <div
+                                    class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-xl text-center border border-green-200">
+                                    <p class="text-2xl font-bold text-green-700">8</p>
+                                    <p class="text-gray-700 font-medium">Viajes Completados</p>
+                                </div>
+                                <div
+                                    class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-xl text-center border border-purple-200">
+                                    <p class="text-2xl font-bold text-purple-700">3</p>
+                                    <p class="text-gray-700 font-medium">compartidos</p>
+                                </div>
+                            </div>
+
+                            <!-- Descripción -->
+                            <div class="bg-gray-50 p-5 rounded-xl">
+                                <h4 class="font-bold text-gray-800 mb-2">Sobre mí</h4>
+                                <p class="text-gray-700" id="descripcionUsuario">
+                                    Apasionada viajera en furgoneta camper. Me encanta explorar rutas por la naturaleza
+                                    y
+                                    descubrir lugares escondidos. Siempre buscando nuevas aventuras en la carretera. 🚐✨
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección: Viajes -->
+            <section id="viajes" class="section-content mb-12 scroll-mt-20">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            <i class="fas fa-route mr-3 text-green-600"></i>Mis Viajes
+                        </h2>
+                        <a href="verTodos.html" class="text-van-primario-v1 hover:text-van-primario-v2 font-semibold">
+                            Ver todos <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Viaje 1 -->
+                        <div
+                            class="p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-green-300 transition duration-200">
+                            <div class="flex items-center">
+                                <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-mountain text-white text-2xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-bold text-gray-800 text-lg">Ruta por los Pirineos</h3>
+                                    <div class="flex flex-wrap gap-4 mt-1">
+                                        <span class="text-gray-600">
+                                            <i class="far fa-calendar mr-2"></i>15-22 Julio 2025
+                                        </span>
+                                        <span class="text-gray-600">
+                                            <i class="far fa-clock mr-2"></i>8 días
+                                        </span>
+                                        <span class="text-gray-600">
+                                            <i class="fas fa-users mr-2"></i>2 personas
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span
+                                        class="inline-block px-3 py-1 bg-green-100 text-green-800 text-sm font-semibold rounded-full">
+                                        Completado
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="mt-3 text-gray-600">Una increíble ruta por las montañas de los Pirineos con vistas
+                                espectaculares.</p>
+                        </div>
+
+                        <!-- Viaje 2 -->
+                        <div
+                            class="p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-300 transition duration-200">
+                            <div class="flex items-center">
+                                <div class="w-16 h-16 bg-blue-500 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-umbrella-beach text-white text-2xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-bold text-gray-800 text-lg">Costa Brava</h3>
+                                    <div class="flex flex-wrap gap-4 mt-1">
+                                        <span class="text-gray-600">
+                                            <i class="far fa-calendar mr-2"></i>10-17 Agosto 2026
+                                        </span>
+                                        <span class="text-gray-600">
+                                            <i class="far fa-clock mr-2"></i>7 días
+                                        </span>
+                                        <span class="text-gray-600">
+                                            <i class="fas fa-users mr-2"></i>2 personas
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span
+                                        class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-semibold rounded-full">
+                                        En curso
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="mt-3 text-gray-600">Explorando las mejores calas y playas de la Costa Brava con la
+                                autocaravana.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección: Preferencias -->
+            <section id="preferencias" class="section-content mb-12 scroll-mt-20">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-heart mr-3 text-red-500"></i>Mis Preferencias
+                    </h2>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="flex items-center p-4 bg-red-50 rounded-xl border border-red-200">
+                            <i class="fas fa-campground text-red-600 mr-3 text-xl"></i>
+                            <span class="font-medium">Camping</span>
+                        </div>
+                        <div class="flex items-center p-4 bg-yellow-50 rounded-xl border border-yellow-200">
+                            <i class="fas fa-utensils text-yellow-600 mr-3 text-xl"></i>
+                            <span class="font-medium">Gastronomía local</span>
+                        </div>
+                        <div class="flex items-center p-4 bg-green-50 rounded-xl border border-green-200">
+                            <i class="fas fa-hiking text-green-600 mr-3 text-xl"></i>
+                            <span class="font-medium">Senderismo</span>
+                        </div>
+                        <div class="flex items-center p-4 bg-blue-50 rounded-xl border border-blue-200">
+                            <i class="fas fa-swimmer text-blue-600 mr-3 text-xl"></i>
+                            <span class="font-medium">Playas</span>
+                        </div>
+                        <div class="flex items-center p-4 bg-purple-50 rounded-xl border border-purple-200">
+                            <i class="fas fa-mountain text-purple-600 mr-3 text-xl"></i>
+                            <span class="font-medium">Montaña</span>
+                        </div>
+                        <div class="flex items-center p-4 bg-pink-50 rounded-xl border border-pink-200">
+                            <i class="fas fa-camera text-pink-600 mr-3 text-xl"></i>
+                            <span class="font-medium">Fotografía</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="font-bold text-gray-800 mb-3">Tipo de viajes preferidos</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1 bg-van-primario-v1/10 text-van-primario-v1 rounded-full text-sm">Aventura</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Naturaleza</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Playa</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Cultural</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección: Vehículo -->
+            <section id="vehiculo" class="section-content mb-12 scroll-mt-20">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-van-shuttle mr-3 text-indigo-600"></i>Mis vehículos
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="text-center">
+                            <div
+                                class="w-48 h-48 mx-auto mb-6 bg-gradient-to-br from-indigo-100 to-white rounded-2xl flex items-center justify-center border-2 border-indigo-200">
+                                <i class="fas fa-van-shuttle text-indigo-400 text-7xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Ford Transit Custom</h3>
+                            <p class="text-gray-600 mb-6">Modelo 2022 • 4 plazas</p>
+
+                            <button
+                                class="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-semibold py-2 px-6 rounded-lg transition duration-200">
+                                Añadir vehículo
+                            </button>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="bg-gray-50 p-4 rounded-xl">
+                                <h4 class="font-bold text-gray-800 mb-3">Especificaciones</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Combustible:</span>
+                                        <span class="font-medium">Diésel</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Autonomía:</span>
+                                        <span class="font-medium">800 km</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Kilometraje:</span>
+                                        <span class="font-medium">15,000 km</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Altura máxima:</span>
+                                        <span class="font-medium">2.5 m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-green-50 p-4 rounded-xl border border-green-200">
+                                <h4 class="font-bold text-gray-800 mb-2">Estado del vehículo</h4>
+                                <div class="flex items-center">
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5 mr-3">
+                                        <div class="bg-green-600 h-2.5 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                    <span class="text-green-700 font-bold">85%</span>
+                                </div>
+                                <p class="text-green-700 text-sm mt-2">Excelente estado • Próxima revisión: Oct 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección: Contacto -->
+            <section id="contacto" class="section-content mb-12 scroll-mt-20">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-address-card mr-3 text-purple-600"></i>Información de Contacto
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center p-4 bg-gray-50 rounded-xl">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Email principal</p>
+                                    <p class="font-semibold">abigail.tomcer@email.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-4 bg-gray-50 rounded-xl">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Teléfono móvil</p>
+                                    <p class="font-semibold">+34 611 11 11 11</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center p-4 bg-gray-50 rounded-xl">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Dirección</p>
+                                    <p class="font-semibold">Calle Palau, 7<br>Puçol, España</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center p-4 bg-gray-50 rounded-xl">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 flex items-center justify-center mr-4">
+                                    <i class="fas fa-calendar-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Miembro desde</p>
+                                    <p class="font-semibold">Septiembre 2025 • 4 meses</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Sección: Logros -->
+            <section id="logros" class="section-content mb-12 scroll-mt-20">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-trophy mr-3 text-amber-500"></i>Mis Logros
+                    </h2>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div
+                            class="text-center p-4 bg-gradient-to-b from-amber-50 to-white rounded-xl border border-amber-200">
+                            <div
+                                class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-amber-200 to-amber-300 rounded-full flex items-center justify-center">
+                                <i class="fas fa-flag text-amber-700 text-2xl"></i>
+                            </div>
+                            <p class="font-bold text-gray-800">Primer Viaje</p>
+                            <p class="text-amber-600 text-sm font-medium">¡Completado!</p>
+                        </div>
+
+                        <div
+                            class="text-center p-4 bg-gradient-to-b from-blue-50 to-white rounded-xl border border-blue-200">
+                            <div
+                                class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-blue-200 to-blue-300 rounded-full flex items-center justify-center">
+                                <i class="fas fa-mountain text-blue-700 text-2xl"></i>
+                            </div>
+                            <p class="font-bold text-gray-800">Explorador</p>
+                            <p class="text-blue-600 text-sm font-medium">+5 montañas</p>
+                        </div>
+
+                        <div
+                            class="text-center p-4 bg-gradient-to-b from-green-50 to-white rounded-xl border border-green-200">
+                            <div
+                                class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-green-200 to-green-300 rounded-full flex items-center justify-center">
+                                <i class="fas fa-campground text-green-700 text-2xl"></i>
+                            </div>
+                            <p class="font-bold text-gray-800">Acampada Maestro</p>
+                            <p class="text-green-600 text-sm font-medium">10 noches</p>
+                        </div>
+
+                        <div
+                            class="text-center p-4 bg-gradient-to-b from-purple-50 to-white rounded-xl border border-purple-200">
+                            <div
+                                class="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-purple-200 to-purple-300 rounded-full flex items-center justify-center">
+                                <i class="fas fa-road text-purple-700 text-2xl"></i>
+                            </div>
+                            <p class="font-bold text-gray-800">5.000 km</p>
+                            <p class="text-purple-600 text-sm font-medium">¡Sigue así!</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h3 class="font-bold text-gray-800 mb-3">Próximos logros</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-gray-300 mr-3"></i>
+                                <div class="flex-1">
+                                    <p class="font-medium">Viajera veterana</p>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-van-primario-v1 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-600 text-sm">3/5 viajes</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-gray-300 mr-3"></i>
+                                <div class="flex-1">
+                                    <p class="font-medium">Fotógrafo de rutas</p>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-van-primario-v1 h-2 rounded-full" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-600 text-sm">8/20 fotos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Footer dinámico -->
+    <div id="footer-container"></div>
+</body>
+
+</html>

@@ -15,6 +15,7 @@ tailwind.config = {
                     'neutro-2': '#E5E7EB',
                 }
             },
+            
             fontFamily: {
                 'titulo': ['Montserrat', 'sans-serif'],
                 'texto': ['Inter', 'sans-serif'],
