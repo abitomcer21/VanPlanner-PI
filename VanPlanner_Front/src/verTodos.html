@@ -103,120 +103,13 @@
                     <div class="flex-grow overflow-hidden px-4">
                         <div class="container mx-auto h-full">
                             <div class="h-full overflow-y-auto pb-8">
-                                <div
+                                <div id="viajes-container"
                                     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 py-4">
-                                    <div
-                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
-                                        <div class="flex justify-between items-start mb-3">
-                                            <div class="flex-1 mr-2">
-                                                <h3 class="text-xl font-bold truncate">Viaje a París</h3>
-                                                <p class="text-blue-100 mt-1">15 - 25 Junio 2026</p>
-                                            </div>
-                                            <a href="editarViaje.html"
-                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
-                                        <p class="text-blue-100 mt-auto">Una semana en la ciudad del amor visitando la
-                                            Torre Eiffel.</p>
+                                    <!-- Los viajes se cargarán dinámicamente aquí -->
+                                    <div class="col-span-full text-center text-white text-xl">
+                                        <i class="fas fa-spinner fa-spin mr-2"></i>
+                                        Cargando viajes...
                                     </div>
-
-                                    <div
-                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
-                                        <div class="flex justify-between items-start mb-3">
-                                            <div class="flex-1 mr-2">
-                                                <h3 class="text-xl font-bold truncate">Aventura en Japón</h3>
-                                                <p class="text-blue-100 mt-1">10 - 30 Agosto 2026</p>
-                                            </div>
-                                            <a href="editarViaje.html"
-                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
-                                        <p class="text-blue-100 mt-auto">Recorriendo Tokio, Kioto y Osaka. Experiencia
-                                            cultural.</p>
-                                    </div>
-
-                                    <div
-                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
-                                        <div class="flex justify-between items-start mb-3">
-                                            <div class="flex-1 mr-2">
-                                                <h3 class="text-xl font-bold truncate">Playa en Cancún</h3>
-                                                <p class="text-blue-100 mt-1">5 - 12 Julio 2026</p>
-                                            </div>
-                                            <a href="editarViaje.html"
-                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
-                                        <p class="text-blue-100 mt-auto">Relax en las mejores playas del Caribe
-                                            mexicano.</p>
-                                    </div>
-
-                                    <div
-                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
-                                        <div class="flex justify-between items-start mb-3">
-                                            <div class="flex-1 mr-2">
-                                                <h3 class="text-xl font-bold truncate">Montañas de Suiza</h3>
-                                                <p class="text-blue-100 mt-1">20 - 30 Septiembre 2026</p>
-                                            </div>
-                                            <a href="editarViaje.html"
-                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
-                                        <p class="text-blue-100 mt-auto">Senderismo en los Alpes suizos y paseos
-                                            panorámicos.</p>
-                                    </div>
-
-                                    <div
-                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
-                                        <div class="flex justify-between items-start mb-3">
-                                            <div class="flex-1 mr-2">
-                                                <h3 class="text-xl font-bold truncate">Ruta 66 USA</h3>
-                                                <p class="text-blue-100 mt-1">1 - 15 Octubre 2026</p>
-                                            </div>
-                                            <a href="editarViaje.html"
-                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
-                                        <p class="text-blue-100 mt-auto">Viaje por carretera por la mítica ruta 66 de
-                                            Estados Unidos.</p>
-                                    </div>
-
-                                    <div
-                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
-                                        <div class="flex justify-between items-start mb-3">
-                                            <div class="flex-1 mr-2">
-                                                <h3 class="text-xl font-bold truncate">Cultura en Roma</h3>
-                                                <p class="text-blue-100 mt-1">12 - 20 Noviembre 2026</p>
-                                            </div>
-                                            <a href="editarViaje.html"
-                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
-                                        <p class="text-blue-100 mt-auto">Historia, arte y gastronomía en la capital
-                                            italiana.</p>
-                                    </div>
-
-                                    <div
-                                        class="bg-van-primario-v2 backdrop-blur-sm rounded-xl shadow-lg p-4 md:p-5 text-white flex flex-col border border-white/20 min-h-[160px]">
-                                        <div class="flex justify-between items-start mb-3">
-                                            <div class="flex-1 mr-2">
-                                                <h3 class="text-xl font-bold truncate">Safari en Kenia</h3>
-                                                <p class="text-blue-100 mt-1">5 - 18 Diciembre 2026</p>
-                                            </div>
-                                            <a href="editarViaje.html"
-                                                class="bg-van-primario-v1 hover:bg-yellow-800 text-white p-3 rounded-full flex-shrink-0 transition duration-300">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-                                        </div>
-                                        <p class="text-blue-100 mt-auto">Avistamiento de animales en su hábitat natural.
-                                        </p>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -236,6 +129,47 @@
 
         <div id="footer-container"></div>
 
+    </div>
+
+    <!-- Popup de confirmación para eliminar viaje -->
+    <div id="popup-eliminar-viaje" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+            <div class="bg-gradient-to-r from-red-600 to-red-700 p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold">Confirmar eliminación</h2>
+                    <button onclick="cerrarPopupEliminar()" class="text-white hover:text-gray-200 transition">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-4xl mr-4"></i>
+                    <div>
+                        <p class="text-gray-800 font-semibold mb-2">¿Estás seguro de que deseas eliminar este viaje?</p>
+                        <p id="nombre-viaje-eliminar" class="text-gray-600 text-sm"></p>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm mb-6">
+                    <strong class="text-red-600">Esta acción no se puede deshacer.</strong> Se eliminarán todos los datos asociados a este viaje.
+                </p>
+                
+                <div class="flex gap-3">
+                    <button onclick="cerrarPopupEliminar()" 
+                        class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-4 rounded-lg transition duration-300">
+                        Cancelar
+                    </button>
+                    <button onclick="confirmarEliminacion()" 
+                        class="flex-1 text-white font-semibold py-3 px-4 rounded-lg transition duration-300"
+                        style="background-color: #DC2626;"
+                        onmouseover="this.style.backgroundColor='#B91C1C'"
+                        onmouseout="this.style.backgroundColor='#DC2626'">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

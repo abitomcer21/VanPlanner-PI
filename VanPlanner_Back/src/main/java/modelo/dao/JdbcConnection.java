@@ -5,32 +5,34 @@ import java.sql.DriverManager;
 
 /**
  * Clase JdbcConnection.
- * Obtiene la conexi髇 f韘ica a la base de datos.
+ * Obtiene la conexi贸n f铆sica a la base de datos.
  * @author Yo mismo
  * @version 1.0
  */
 public class JdbcConnection {
-	//Conexi髇 a la base de datos
+	//Conexi贸n a la base de datos
 	static Connection connection = null;
 
 	/**
-	 * Obtener la conexi髇 a la base de datos.
-	 * @return connection La conexi髇 a la base de datos.
+	 * Obtener la conexi贸n a la base de datos.
+	 * @return connection La conexi贸n a la base de datos.
 	 */
 	public static Connection getConnection() {
 		String db = "vanplanner_db";
 		String user = "abi";
 		String pass = "12345.aa";
-		String url = "jdbc:mysql://localhost:3306/" + db;
+		String url = "jdbc:mysql://localhost:3306/" + db + "?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci";
 		
 		try {
 			// Cargar el conector de MySQL
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			// Crear conexi髇 a la base de datos
+			// Crear conexi贸n a la base de datos
 			connection = (Connection) DriverManager.getConnection(url, user, pass);
+			
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Error en conexi贸n: " + e.getMessage());
+			e.printStackTrace();
 		}		
 		return connection;  
     }

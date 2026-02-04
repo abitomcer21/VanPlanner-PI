@@ -1,4 +1,33 @@
 class LoginPage {
+        showAccountInactiveModal() {
+            // Elimina cualquier modal anterior
+            const oldModal = document.getElementById('modalCuentaInactiva');
+            if (oldModal) oldModal.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'modalCuentaInactiva';
+                modal.className = 'fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50';
+            modal.innerHTML = `
+                    <div class="relative bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center border-2 border-van-alerta animate-fade-in">
+                        <button id="cerrarModalCuentaInactiva" aria-label="Cerrar" class="absolute top-3 right-3 text-van-alerta hover:text-red-700 text-2xl font-bold focus:outline-none">&times;</button>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-van-alerta/10 rounded-full p-4 mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-van-alerta" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z" /></svg>
+                            </div>
+                            <h2 class="text-2xl font-bold mb-2 text-van-alerta">Cuenta desactivada</h2>
+                            <p class="mb-6 text-gray-700">Tu cuenta no está activa.<br>Contacta con administración para más información.</p>
+                            <button id="cerrarModalCuentaInactivaBtn" class="bg-van-alerta text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-red-700 transition-all focus:outline-none focus:ring-2 focus:ring-van-alerta">Cerrar</button>
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes fade-in { from { opacity: 0; transform: scale(0.95);} to { opacity: 1; transform: scale(1);} }
+                        .animate-fade-in { animation: fade-in 0.25s ease; }
+                    </style>
+            `;
+            document.body.appendChild(modal);
+            document.getElementById('cerrarModalCuentaInactiva').onclick = () => modal.remove();
+                document.getElementById('cerrarModalCuentaInactivaBtn').onclick = () => modal.remove();
+        }
     constructor() {
         this.form = document.getElementById('loginForm');
         this.init();
@@ -82,7 +111,6 @@ class LoginPage {
             password: formData.get('password'),
         };
 
-
         this.showLoading(true);
 
         try {
@@ -90,10 +118,9 @@ class LoginPage {
 
             if (response.status === 200) {
                 this.showNotification('Inicio de sesión exitoso', 'success');
-
                 let respuesta = await response.json();
                 localStorage.setItem('usuario', JSON.stringify(respuesta));
-
+                localStorage.setItem('usuarioId', respuesta.id_usuario);
                 setTimeout(() => {
                     if (respuesta.tipoUsuario === 'user') {
                         window.location.href = 'verTodos.html';
@@ -102,7 +129,33 @@ class LoginPage {
                     }
                 }, 1500);
             } else {
-                this.showNotification(error.message || 'Error en el inicio de sesión', 'error');
+                // Leer el error detallado del backend, aunque la respuesta no sea JSON
+                let errorMsg = 'Error en el inicio de sesión';
+                let isInactive = false;
+                try {
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const errorData = await response.json();
+                        if (errorData && errorData.error === 'inactivo') {
+                            isInactive = true;
+                        } else if (errorData && errorData.mensaje) {
+                            errorMsg = errorData.mensaje;
+                        }
+                    } else {
+                        const text = await response.text();
+                        if (text.includes('inactiva') || text.includes('no está activa')) {
+                            isInactive = true;
+                        }
+                    }
+                } catch (err) {}
+                // No guardar nada en localStorage si está inactivo o error
+                localStorage.removeItem('usuario');
+                localStorage.removeItem('usuarioId');
+                if (isInactive) {
+                    this.showAccountInactiveModal();
+                    return;
+                }
+                this.showNotification(errorMsg, 'error');
             }
         } catch (error) {
             this.showNotification(error.message || 'Error en el inicio de sesión', 'error');
@@ -221,4 +274,76 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('loginForm')) {
         window.loginPage = new LoginPage();
     }
+    
+    // Funcionalidad para recuperar contraseña
+    inicializarRecuperarPassword();
 });
+
+// Funcionalidad de recuperar contraseña
+function inicializarRecuperarPassword() {
+    const linkRecuperar = document.getElementById('linkRecuperarPassword');
+    const modalRecuperar = document.getElementById('modalRecuperarPassword');
+    const modalConfirmacion = document.getElementById('modalConfirmacion');
+    const formRecuperar = document.getElementById('formRecuperarPassword');
+    const btnCancelar = document.getElementById('btnCancelarRecuperar');
+    const btnCerrarConfirmacion = document.getElementById('btnCerrarConfirmacion');
+
+    // Abrir modal de recuperar contraseña
+    if (linkRecuperar) {
+        linkRecuperar.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalRecuperar.style.display = 'flex';
+        });
+    }
+
+    // Cerrar modal al hacer clic en cancelar
+    if (btnCancelar) {
+        btnCancelar.addEventListener('click', () => {
+            modalRecuperar.style.display = 'none';
+            formRecuperar.reset();
+        });
+    }
+
+    // Cerrar modal al hacer clic fuera
+    if (modalRecuperar) {
+        modalRecuperar.addEventListener('click', (e) => {
+            if (e.target === modalRecuperar) {
+                modalRecuperar.style.display = 'none';
+                formRecuperar.reset();
+            }
+        });
+    }
+
+    // Enviar formulario de recuperación
+    if (formRecuperar) {
+        formRecuperar.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('emailRecuperar').value;
+
+            console.log('Enviando correo de recuperación a:', email);
+            
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            modalRecuperar.style.display = 'none';
+            
+            modalConfirmacion.style.display = 'flex';
+            
+            formRecuperar.reset();
+        });
+    }
+
+    if (btnCerrarConfirmacion) {
+        btnCerrarConfirmacion.addEventListener('click', () => {
+            modalConfirmacion.style.display = 'none';
+        });
+    }
+
+    if (modalConfirmacion) {
+        modalConfirmacion.addEventListener('click', (e) => {
+            if (e.target === modalConfirmacion) {
+                modalConfirmacion.style.display = 'none';
+            }
+        });
+    }
+}

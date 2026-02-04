@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo viaje - VanPlanner</title>
+    <title>Ver viaje - VanPlanner</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,43 +19,49 @@
     <!-- Otros estilos -->
     <link rel="stylesheet" href="../dist/output.css">
     <link rel="stylesheet" href="./css/paginas/nuevoViaje.css">
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6iJUYJYphmPe4e-mcGDhppqLSud9J0vY&callback=initMap">
-        </script>
+    <link rel="stylesheet" href="./css/calendar.css">
 
 
-    <script src="js/pages/verTodos.js"></script>
+
+    <script src="js/pages/verViajeEspecifico.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales/es.global.min.js'></script>
+    <script async defer loading="async"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6iJUYJYphmPe4e-mcGDhppqLSud9J0vY&callback=initMap&libraries=places">
+        </script>
     <script src="js/components/loader.js"></script>
     <script src="js/components/calendar.js"></script>
     <script src="js/components/mapa.js"></script>
+    <script src="js/pages/presupuesto.js"></script>
+
+
 
 
 </head>
 
 <body class="min-h-screen bg-gray-100 overflow-hidden">
     <div class="min-h-screen flex flex-col">
-        <header class="bg-van-primario-v2 py-1 shadow-md flex-shrink-0">
+        <header class="bg-van-primario-v2 py-0.5 shadow-md">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-3 items-center">
                     <div class="justify-self-start"></div>
 
-                    <div class="justify-self-center flex items-center space-x-4 md:space-x-8 lg:space-x-12">
+                    <div class="justify-self-center flex items-center space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8">
                         <a href="panelIniciado.html"
-                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-[10px] sm:text-xs md:text-sm">
                             INICIO
                         </a>
 
-                        <a href="panelIniciado.html" class="-mt-2 -mb-3">
+                        <a href="panelIniciado.html" class="-my-1">
                             <div class="flex items-center">
                                 <img src="assets/images/logoAplicacion.png" alt="VanPlanner"
-                                    class="h-20 w-auto md:h-28">
+                                    class="h-12 w-auto sm:h-16 md:h-20 lg:h-24">
                             </div>
                         </a>
 
                         <a href="nuevoViaje.html"
-                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-xs md:text-sm">
+                            class="text-van-secundario-v3 font-titulo font-semibold hover:text-van-primario-v1 transition duration-200 text-[10px] sm:text-xs md:text-sm">
                             NUEVO VIAJE
                         </a>
                     </div>
@@ -63,10 +69,12 @@
                     <div class="justify-self-end">
                         <el-dropdown class="inline-block">
                             <button
-                                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-van-primario-v1 px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">
-                                ¡Hola, <span id="nombreUsuario">{nombre}!</span>
+                                class="inline-flex w-full justify-center gap-x-1 rounded-md bg-van-primario-v1 px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">
+                                <span class="hidden sm:inline">¡Hola,</span>
+                                <span id="nombreUsuario" class="hidden sm:inline">{nombre}!</span>
+                                <i class="fas fa-user sm:hidden text-xs"></i>
                                 <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
-                                    class="-mr-1 size-5 text-gray-400">
+                                    class="-mr-1 size-4 sm:size-5 text-gray-400">
                                     <path
                                         d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
                                         clip-rule="evenodd" fill-rule="evenodd" />
@@ -74,30 +82,27 @@
                             </button>
                             <el-menu anchor="bottom end" popover
                                 class="w-56 origin-top-right rounded-md bg-white shadow-lg outline-1 outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
-                                <div class="py-1">
-                                    <a href="#"
-                                        class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
-                                    </a>
+                                <a href="perfilUser.html"
+                                    class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Perfil
+                                </a>
 
-                                    <form action="#" method="POST">
-                                        <button type="submit"
-                                            class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
-                                            sesión</button>
-                                    </form>
-                                </div>
+                                <form action="index.html">
+                                    <button type="submit"
+                                        class="block w-full px-4 py-2 text-left text-sm text-gray-700 focus:bg-gray-100 focus:text-gray-900 focus:outline-hidden">Cerrar
+                                        sesión</button>
+                                </form>
                             </el-menu>
                         </el-dropdown>
                     </div>
                 </div>
             </div>
         </header>
-
         <main class="flex-1 overflow-hidden">
             <div class="h-full w-full px-2 sm:px-4 lg:px-8 xl:px-12 2xl:px-16 py-2 sm:py-4">
                 <div class="h-full grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4">
 
                     <div class="lg:col-span-3 h-full flex flex-col bg-blue-50 rounded-xl shadow-md">
-                        <div class="p-4 border-b border-blue-100">
+                        <div class="p-3 border-b border-blue-100">
                             <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center">
                                 <i class="fas fa-cog text-blue-600 mr-2"></i> CONFIGURACIÓN
                             </h2>
@@ -111,8 +116,8 @@
                                     <div>
                                         <label class="block text-sm text-gray-600 mb-1">Origen:</label>
                                         <div class="flex items-center">
-                                            <input type="text"
-                                                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                            <input type="text" id="input-origen" disabled
+                                                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 cursor-not-allowed"
                                                 placeholder="Ciudad de origen">
                                             <i class="fas fa-map-marker-alt text-blue-500 ml-2"></i>
                                         </div>
@@ -120,17 +125,51 @@
                                     <div>
                                         <label class="block text-sm text-gray-600 mb-1">Destino:</label>
                                         <div class="flex items-center">
-                                            <input type="text"
-                                                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                            <input type="text" id="input-destino" disabled
+                                                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm bg-gray-50 cursor-not-allowed"
                                                 placeholder="Ciudad de destino">
                                             <i class="fas fa-map-marker-alt text-red-500 ml-2"></i>
                                         </div>
                                     </div>
 
-                                    <button
-                                        class="mt-2 w-full bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium py-2 px-3 rounded-lg flex items-center justify-center transition duration-200 text-sm">
-                                        <i class="fas fa-plus-circle mr-2"></i> Añadir Parada
-                                    </button>
+                                    <!-- Selectores de fecha -->
+                                    <div id="contenedor-fechas" class="mt-4 space-y-3">
+                                        <div>
+                                            <label class="block text-sm text-gray-600 mb-1 flex items-center">
+                                                <i class="fas fa-calendar-alt text-blue-500 mr-2 text-xs"></i>
+                                                Fecha de inicio:
+                                            </label>
+                                            <input type="date" id="fecha-inicio"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-sm text-gray-600 mb-1 flex items-center">
+                                                <i class="fas fa-calendar-check text-blue-500 mr-2 text-xs"></i>
+                                                Fecha de finalización:
+                                            </label>
+                                            <input type="date" id="fecha-fin"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                                        </div>
+
+                                        <button id="btn-crear-viaje" disabled
+                                            class="mt-2 w-full bg-gray-400 text-gray-700 font-medium py-2 px-3 rounded-lg flex items-center justify-center transition duration-200 text-sm opacity-50 cursor-not-allowed">
+                                            <i class="fas fa-plus-circle mr-2"></i> Crear viaje
+                                        </button>
+
+                                        <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                                            <label class="block text-sm text-gray-600 mb-2 flex items-center">
+                                                <i class="fas fa-road text-blue-500 mr-2 text-xs"></i>
+                                                Distancia total:
+                                            </label>
+                                            <div class="flex items-center justify-between">
+                                                <span id="distancia-total" class="text-lg font-bold text-blue-700">--
+                                                    km</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-1">Se calculará al añadir puntos de
+                                                interés</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -138,7 +177,7 @@
                                 <h3 class="font-semibold text-gray-700 mb-3 flex items-center">
                                     <i class="fas fa-car text-blue-500 mr-2"></i> VEHÍCULO
                                 </h3>
-                                <div>
+                                <div id="contenedor-vehiculo">
                                     <div class="bg-white p-3 rounded-lg border border-gray-200">
                                         <div class="flex items-center mb-2">
                                             <div
@@ -146,12 +185,12 @@
                                                 <i class="fas fa-car text-blue-600 text-sm"></i>
                                             </div>
                                             <div>
-                                                <p class="font-medium text-gray-800 text-sm"></p>
-                                                <p class="text-xs text-gray-500"></p>
+                                                <p id="nombre-vehiculo" class="font-medium text-gray-800 text-sm">Sin vehículo</p>
+                                                <p id="marca-vehiculo" class="text-xs text-gray-500">Añade un vehículo</p>
                                             </div>
                                         </div>
                                         <div class="text-xs">
-                                            <p class="text-gray-600 mb-1">Consumo: <span class="font-medium"></span></p>
+                                            <p class="text-gray-600 mb-1">Consumo: <span id="consumo-vehiculo" class="font-medium">-</span></p>
                                             <div class="w-full bg-gray-200 rounded-full h-1.5">
                                                 <div class="bg-green-500 h-1.5 rounded-full" style="width: 65%"></div>
                                             </div>
@@ -165,46 +204,66 @@
                                     <i class="fas fa-wallet text-blue-500 mr-2"></i> PRESUPUESTO
                                 </h3>
                                 <div class="space-y-2">
-                                    <div
-                                        class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="h-7 w-7 bg-blue-100 rounded-full flex items-center justify-center mr-2">
-                                                <i class="fas fa-car text-blue-600 text-xs"></i>
+                                    <div class="bg-white p-3 rounded-lg border border-gray-200">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center">
+                                                <div class="h-7 w-7 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                                                    <i class="fas fa-car text-blue-600 text-xs"></i>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <span class="text-gray-700 text-sm font-semibold block">Gasolina</span>
+                                                    <span id="gasto-gasolina" class="text-xs text-gray-500">0.00€</span>
+                                                </div>
                                             </div>
-                                            <span class="text-gray-700 text-sm">Vehículo</span>
+                                            <button id="btn-add-gasolina" class="text-blue-600 hover:text-blue-800 text-sm">
+                                                <i class="fas fa-plus-circle"></i>
+                                            </button>
                                         </div>
-                                        <button class="text-blue-600 hover:text-blue-800 text-sm">
-                                            <i class="fas fa-plus-circle"></i>
-                                        </button>
+                                        <div id="lista-gastos-gasolina" class="mt-2 space-y-1 text-xs"></div>
                                     </div>
 
-                                    <div
-                                        class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="h-7 w-7 bg-green-100 rounded-full flex items-center justify-center mr-2">
-                                                <i class="fas fa-bed text-green-600 text-xs"></i>
+                                    <div class="bg-white p-3 rounded-lg border border-gray-200">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center">
+                                                <div class="h-7 w-7 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                                                    <i class="fas fa-bed text-green-600 text-xs"></i>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <span class="text-gray-700 text-sm font-semibold block">Hoteles</span>
+                                                    <span id="gasto-hoteles" class="text-xs text-gray-500">0.00€</span>
+                                                </div>
                                             </div>
-                                            <span class="text-gray-700 text-sm">Cama</span>
+                                            <button id="btn-add-hoteles" class="text-blue-600 hover:text-blue-800 text-sm">
+                                                <i class="fas fa-plus-circle"></i>
+                                            </button>
                                         </div>
-                                        <button class="text-blue-600 hover:text-blue-800 text-sm">
-                                            <i class="fas fa-plus-circle"></i>
-                                        </button>
+                                        <div id="lista-gastos-hoteles" class="mt-2 space-y-1 text-xs"></div>
                                     </div>
 
-                                    <div
-                                        class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="h-7 w-7 bg-orange-100 rounded-full flex items-center justify-center mr-2">
-                                                <i class="fas fa-utensils text-orange-600 text-xs"></i>
+                                    <div class="bg-white p-3 rounded-lg border border-gray-200">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center">
+                                                <div class="h-7 w-7 bg-orange-100 rounded-full flex items-center justify-center mr-2">
+                                                    <i class="fas fa-utensils text-orange-600 text-xs"></i>
+                                                </div>
+                                                <div class="flex-1">
+                                                    <span class="text-gray-700 text-sm font-semibold block">Restaurantes</span>
+                                                    <span id="gasto-restaurantes" class="text-xs text-gray-500">0.00€</span>
+                                                </div>
                                             </div>
-                                            <span class="text-gray-700 text-sm">Comida</span>
+                                            <button id="btn-add-restaurantes" class="text-blue-600 hover:text-blue-800 text-sm">
+                                                <i class="fas fa-plus-circle"></i>
+                                            </button>
                                         </div>
-                                        <button class="text-blue-600 hover:text-blue-800 text-sm">
-                                            <i class="fas fa-plus-circle"></i>
-                                        </button>
+                                        <div id="lista-gastos-restaurantes" class="mt-2 space-y-1 text-xs"></div>
+                                    </div>
+
+                                    <!-- Total del presupuesto -->
+                                    <div class="bg-van-primario-v1 p-2 rounded-lg text-white mt-3">
+                                        <div class="flex justify-between items-center">
+                                            <span class="font-semibold">TOTAL GASTADO:</span>
+                                            <span id="total-presupuesto" class="text-2xl font-bold">0.00€</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -212,83 +271,135 @@
                     </div>
 
                     <div class="lg:col-span-6 h-full flex flex-col space-y-2 sm:space-y-4">
-                        <div
-                            class="flex-1 min-h-[200px] sm:min-h-[300px] bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
-                            <div class="p-4 border-b border-gray-200">
-                                <h3 class="font-semibold text-gray-700 flex items-center">
-                                    <i class="fas fa-map-marked-alt text-green-600 mr-2"></i> MAPA DEL VIAJE
-                                </h3>
+                        <!--Mapa - 2/3 de la altura-->
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
+                            style="height: 66.666%;">
+                            <div class="p-3 sm:p-4 border-b border-gray-200">
+                                <div
+                                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                                    <h3 class="font-semibold text-gray-700 flex items-center text-sm sm:text-base">
+                                        <i class="fas fa-map-marked-alt text-green-600 mr-2"></i> MAPA DEL VIAJE
+                                    </h3>
+
+                                    <!-- Barra de búsqueda compacta -->
+                                    <div class="relative w-full sm:w-64">
+                                        <input id="search-input" type="text" placeholder="Buscar lugares..."
+                                            class="w-full p-2 pl-10 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                                        <i class="fas fa-search absolute left-3 top-2.5 text-gray-400 text-sm"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="map" class="flex-1 bg-gray-200 flex items-center justify-center">
-                            </div>
+
+                            <div id="map" class="flex-1 bg-gray-200"></div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 min-h-[150px]">
-                            <div class="bg-white rounded-xl shadow-md p-4 flex flex-col min-h-[700px]">
 
-                                <!--Calendario-->
-                                <div id='calendar' class="flex-grow"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4" style="height: 33.333%;">
+                            <!-- Calendario -->
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                                <div id='calendar'
+                                    class="h-full p-1 sm:p-2 overflow-auto custom-scrollbar text-[8px] sm:text-[10px]"
+                                    style="font-size: 0.6rem;"></div>
                             </div>
 
                             <!-- Puntos de interés-->
-
-                            <div class="bg-white rounded-xl shadow-md p-4 flex flex-col">
+                            <div class="bg-white rounded-xl shadow-md p-3 sm:p-4 flex flex-col overflow-hidden">
                                 <div class="flex justify-between items-center mb-3">
                                     <h3 class="font-semibold text-gray-700 flex items-center text-sm">
                                         <i class="fas fa-map-pin text-red-600 mr-2"></i> PUNTOS DE INTERÉS
                                     </h3>
-                                    <button
-                                        class="bg-red-100 hover:bg-red-200 text-red-700 font-medium py-1.5 px-3 rounded-lg flex items-center transition duration-200 text-xs">
-                                        <i class="fas fa-plus mr-1"></i> Añadir
-                                    </button>
                                 </div>
 
+                                <!-- CONTENEDOR CON SCROLL -->
                                 <div class="space-y-2 flex-1 overflow-y-auto custom-scrollbar">
-                                    <div
-                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm">
+                                    <!-- HOTEL -->
+                                    <div id="categoria-hotel"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
                                         <div
-                                            class="h-8 w-8 bg-red-100 rounded-full flex items-center justify-center mr-2">
-                                            <i class="fas fa-landmark text-red-600 text-xs"></i>
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-purple-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-bed text-purple-600 text-xs"></i>
                                         </div>
-                                        <div class="flex-1 truncate">
-                                            <p class="font-medium text-gray-800 truncate"></p>
-                                            <p class="text-xs text-gray-500 truncate"></p>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Hoteles</p>
                                         </div>
                                     </div>
 
-                                    <div
-                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm">
+                                    <!-- RESTAURANTE -->
+                                    <div id="categoria-restaurante"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
                                         <div
-                                            class="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-blue-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
                                             <i class="fas fa-utensils text-blue-600 text-xs"></i>
                                         </div>
-                                        <div class="flex-1 truncate">
-                                            <p class="font-medium text-gray-800 truncate"></p>
-                                            <p class="text-xs text-gray-500 truncate"></p>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Restaurantes</p>
                                         </div>
                                     </div>
 
-                                    <div
-                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm">
+                                    <!-- MONUMENTO -->
+                                    <div id="categoria-monumento"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
                                         <div
-                                            class="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center mr-2">
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-red-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-landmark text-red-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Monumentos</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- NATURALEZA -->
+                                    <div id="categoria-naturaleza"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
+                                        <div
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-green-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
                                             <i class="fas fa-tree text-green-600 text-xs"></i>
                                         </div>
-                                        <div class="flex-1 truncate">
-                                            <p class="font-medium text-gray-800 truncate"></p>
-                                            <p class="text-xs text-gray-500 truncate"></p>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Naturaleza</p>
                                         </div>
                                     </div>
 
-                                    <div
-                                        class="flex items-center justify-center p-2 border border-dashed border-gray-300 rounded-lg text-gray-400 hover:bg-gray-50 cursor-pointer text-xs">
-                                        <i class="fas fa-plus mr-1"></i> Añadir punto
+                                    <!-- COMPRAS -->
+                                    <div id="categoria-compras"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
+                                        <div
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-yellow-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-shopping-bag text-yellow-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Compras</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- TRANSPORTE -->
+                                    <div id="categoria-transporte"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
+                                        <div
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-indigo-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-bus text-indigo-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Transporte</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- OTROS -->
+                                    <div id="categoria-otros"
+                                        class="flex items-center p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-sm cursor-pointer">
+                                        <div
+                                            class="h-7 w-7 sm:h-8 sm:w-8 bg-gray-100 rounded-full flex items-center justify-center mr-2 flex-shrink-0">
+                                            <i class="fas fa-map-marker-alt text-gray-600 text-xs"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="font-medium text-gray-800 truncate">Otros</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                     <div class="lg:col-span-3 h-full flex flex-col space-y-2 sm:space-y-4">
                         <div class="flex-1 min-h-[200px] bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                             <div class="p-4 border-b border-gray-200">
@@ -296,15 +407,12 @@
                                     <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center">
                                         <i class="fas fa-route text-green-600 mr-2"></i> ITINERARIO
                                     </h2>
-                                    <button
-                                        class="bg-green-100 hover:bg-green-200 text-green-700 font-medium py-2 px-3 rounded-lg flex items-center transition duration-200 text-sm">
-                                        <i class="fas fa-plus mr-2"></i> Añadir Día
-                                    </button>
+
                                 </div>
                             </div>
 
                             <div class="flex-1 overflow-y-auto custom-scrollbar p-4">
-                                <div class="space-y-3">
+                                <div id="contenedor-itinerario" class="space-y-3">
                                     <div class="border-l-3 border-blue-500 pl-3 py-2 bg-blue-50 rounded-r-lg">
                                         <div class="flex justify-between items-center">
                                             <h3 class="font-semibold text-gray-800 text-sm">DÍA 1</h3>
@@ -326,10 +434,10 @@
                                                 class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded"></span>
                                         </div>
                                         <p class="text-xs text-gray-600 mt-1 truncate">
-                                            Córdoba</p>
+                                        </p>
                                         <div class="mt-1 flex items-center text-xs text-gray-500">
                                             <i class="fas fa-clock mr-1 text-xs"></i>
-                                            <span>9:00 - 19:00</span>
+                                            <span></span>
                                         </div>
                                     </div>
 
@@ -370,11 +478,6 @@
                                             <span></span>
                                         </div>
                                     </div>
-
-                                    <div
-                                        class="flex items-center justify-center p-2 border border-dashed border-gray-300 rounded-lg text-gray-400 hover:bg-gray-50 cursor-pointer text-xs">
-                                        <i class="fas fa-plus mr-1"></i> Añadir nuevo día
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -393,42 +496,15 @@
                             </div>
 
                             <div class="flex-1 overflow-y-auto custom-scrollbar p-4">
-                                <div class="space-y-3">
-                                    <div class="flex items-center p-3 border border-gray-200 rounded-lg">
-                                        <div
-                                            class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                            <i class="fas fa-user text-blue-600"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <p class="font-medium text-gray-800 text-sm"></p>
-                                            <p class="text-xs text-gray-500">Conductor principal</p>
-                                        </div>
-                                        <button class="text-gray-400 hover:text-red-500">
-                                            <i class="fas fa-times text-sm"></i>
-                                        </button>
-                                    </div>
-
-                                    <div class="flex items-center p-3 border border-gray-200 rounded-lg">
-                                        <div
-                                            class="h-10 w-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                                            <i class="fas fa-user text-green-600"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <p class="font-medium text-gray-800 text-sm"></p>
-                                            <p class="text-xs text-gray-500">Navegador</p>
-                                        </div>
-                                        <button class="text-gray-400 hover:text-red-500">
-                                            <i class="fas fa-times text-sm"></i>
-                                        </button>
-                                    </div>
-
-                                    <div
-                                        class="flex items-center justify-center p-3 border border-dashed border-gray-300 rounded-lg text-gray-400 hover:bg-gray-50 cursor-pointer text-sm">
-                                        <i class="fas fa-user-plus mr-2"></i> Invitar colaborador
-                                    </div>
+                                <div id="lista-colaboradores" class="space-y-3">
+                                    <!-- Los colaboradores se cargarán dinámicamente aquí -->
                                 </div>
                             </div>
                         </div>
+                        <!-- Botón Guardar Viaje -->
+                        <button class="w-full bg-van-primario-v1 hover:bg-van-primario-v2 text-white font-bold py-3 px-4 rounded-xl shadow-md flex items-center justify-center transition duration-200">
+                            <i class="fas fa-save mr-2"></i> GUARDAR VIAJE
+                        </button>
                     </div>
                 </div>
             </div>
@@ -436,6 +512,278 @@
 
         <div id="footer-container"></div>
     </div>
+
+    <!-- Popup para añadir gasto de gasolina -->
+    <div id="popup-gasto-gasolina" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 transform transition-all">
+            <div class="text-center mb-6">
+                <div class="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-gas-pump text-blue-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Añadir gasto de gasolina</h2>
+            </div>
+            <form id="form-gasto-gasolina" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Descripción</label>
+                    <input type="text" id="desc-gasolina" name="descripcion" required
+                        placeholder="Ej: Repostaje en Repsol"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Cantidad (€)</label>
+                    <input type="number" step="0.01" min="0" id="cantidad-gasolina" name="cantidad" required
+                        placeholder="0.00"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="cerrarPopupGasto('gasolina')"
+                        class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded-lg transition">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition">
+                        <i class="fas fa-plus mr-2"></i>Añadir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup para añadir gasto de hoteles -->
+    <div id="popup-gasto-hoteles" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 transform transition-all">
+            <div class="text-center mb-6">
+                <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-bed text-green-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Añadir gasto de hotel</h2>
+            </div>
+            <form id="form-gasto-hoteles" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre del hotel</label>
+                    <input type="text" id="desc-hoteles" name="descripcion" required
+                        placeholder="Ej: Hotel Paradise"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Cantidad (€)</label>
+                    <input type="number" step="0.01" min="0" id="cantidad-hoteles" name="cantidad" required
+                        placeholder="0.00"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="cerrarPopupGasto('hoteles')"
+                        class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded-lg transition">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">
+                        <i class="fas fa-plus mr-2"></i>Añadir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup para añadir gasto de restaurantes -->
+    <div id="popup-gasto-restaurantes" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-4 transform transition-all">
+            <div class="text-center mb-6">
+                <div class="mx-auto w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-utensils text-orange-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Añadir gasto de restaurante</h2>
+            </div>
+            <form id="form-gasto-restaurantes" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nombre del restaurante</label>
+                    <input type="text" id="desc-restaurantes" name="descripcion" required
+                        placeholder="Ej: La Taberna"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Cantidad (€)</label>
+                    <input type="number" step="0.01" min="0" id="cantidad-restaurantes" name="cantidad" required
+                        placeholder="0.00"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="cerrarPopupGasto('restaurantes')"
+                        class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded-lg transition">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg transition">
+                        <i class="fas fa-plus mr-2"></i>Añadir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup para añadir vehículo -->
+    <div id="popup-vehiculo" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg mx-4 transform transition-all">
+            <!-- Encabezado -->
+            <div class="text-center mb-6">
+                <div class="mx-auto w-16 h-16 bg-van-primario-v1 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-car text-white text-2xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Añade tu vehículo</h2>
+                <p class="text-gray-600">Para crear un nuevo viaje, primero necesitas registrar un vehículo.</p>
+            </div>
+
+            <!-- Formulario -->
+            <form id="form-add-vehiculo" class="space-y-5">
+                <!-- Nombre del vehículo -->
+                <div>
+                    <label for="nombre_vehiculo" class="block text-sm font-semibold text-gray-700 mb-2">Nombre del vehículo
+                    </label>
+                    <input type="text" id="nombre_vehiculo" name="nombre_vehiculo" required
+                        placeholder="Ej: Mi furgoneta"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-van-primario-v1 focus:border-transparent transition-all">
+                </div>
+
+                <!-- Marca y Modelo -->
+                <div>
+                    <label for="marca_modelo" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-car-side text-van-primario-v1 mr-2"></i>Marca y modelo
+                    </label>
+                    <input type="text" id="marca_modelo" name="marca_modelo" required
+                        placeholder="Ej: Volkswagen California"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-van-primario-v1 focus:border-transparent transition-all">
+                </div>
+
+                <!-- Consumo y Capacidad del tanque -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="consumo" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-tachometer-alt text-van-primario-v1 mr-2"></i>Consumo
+                        </label>
+                        <div class="relative">
+                            <input type="number" step="0.1" min="0" id="consumo" name="consumo" required
+                                placeholder="8.5"
+                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-van-primario-v1 focus:border-transparent transition-all">
+                            <span class="absolute right-3 top-3 text-gray-500 text-sm">L/100km</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="capacidad_tanque" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-gas-pump text-van-primario-v1 mr-2"></i>Tanque
+                        </label>
+                        <div class="relative">
+                            <input type="number" step="1" min="0" id="capacidad_tanque" name="capacidad_tanque" required
+                                placeholder="60"
+                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-van-primario-v1 focus:border-transparent transition-all">
+                            <span class="absolute right-3 top-3 text-gray-500 text-sm">L</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tipo de combustible -->
+                <div>
+                    <label for="tipo_combustible" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-fill-drip text-van-primario-v1 mr-2"></i>Tipo de combustible
+                    </label>
+                    <select id="tipo_combustible" name="tipo_combustible" required
+                        class="w-full px-4 py-3 border-2 border-gray-300 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-van-primario-v1 focus:border-transparent transition-all cursor-pointer">
+                        <option value="" disabled selected>Selecciona el tipo</option>
+                        <option value="diesel">🛢️ Diésel</option>
+                        <option value="gasolina">⛽ Gasolina</option>
+                        <option value="hibrido">🔋 Híbrido</option>
+                        <option value="electrico">⚡ Eléctrico</option>
+                    </select>
+                </div>
+
+                <!-- Botón de envío -->
+                <div class="pt-4">
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-van-primario-v1 to-van-primario-v2 hover:from-van-primario-v2 hover:to-van-primario-v1 text-white font-bold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-save mr-2"></i>Guardar vehículo
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup para añadir punto de interés -->
+    <div id="popup-punto-interes" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg mx-4 transform transition-all">
+            <!-- Encabezado -->
+            <div class="text-center mb-6">
+                <div class="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-map-marker-alt text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Añadir punto de interés</h2>
+                <p id="nombre-punto-interes" class="text-lg font-semibold text-blue-600"></p>
+            </div>
+
+            <!-- Formulario -->
+            <form id="form-punto-interes" class="space-y-5">
+                <!-- Categoría -->
+                <div>
+                    <label for="categoria-punto" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-tag text-blue-600 mr-2"></i>Categoría
+                    </label>
+                    <select id="categoria-punto" name="categoria-punto" required
+                        class="w-full px-4 py-3 border-2 border-gray-300 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all cursor-pointer">
+                        <option value="hotel">🏨 Hotel</option>
+                        <option value="restaurante">🍴 Restaurante</option>
+                        <option value="monumento">🏛️ Monumento</option>
+                        <option value="naturaleza">🌳 Naturaleza</option>
+                        <option value="compras">🛍️ Compras</option>
+                        <option value="transporte">🚗 Transporte</option>
+                        <option value="otro">📍 Otro</option>
+                    </select>
+                </div>
+
+                <!-- Fecha de la actividad -->
+                <div>
+                    <label for="fecha-actividad" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-calendar text-blue-600 mr-2"></i>Fecha de la actividad
+                    </label>
+                    <input type="date" id="fecha-actividad" name="fecha-actividad" required
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all">
+                    <p id="error-fecha" class="text-red-500 text-sm mt-1 hidden"></p>
+                </div>
+
+                <!-- Hora inicio y fin -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="hora-inicio-actividad" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-clock text-blue-600 mr-2"></i>Hora inicio
+                        </label>
+                        <input type="time" id="hora-inicio-actividad" name="hora-inicio-actividad" required
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all">
+                    </div>
+
+                    <div>
+                        <label for="hora-fin-actividad" class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-clock text-blue-600 mr-2"></i>Hora fin
+                        </label>
+                        <input type="time" id="hora-fin-actividad" name="hora-fin-actividad" required
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all">
+                    </div>
+                </div>
+                <p id="error-hora" class="text-red-500 text-sm mt-1 hidden"></p>
+
+                <!-- Botones -->
+                <div class="flex gap-4 pt-4">
+                    <button type="button" onclick="cerrarPopupPuntoInteres()"
+                        class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
+                        <i class="fas fa-times mr-2"></i>Cancelar
+                    </button>
+                    <button type="submit"
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300">
+                        <i class="fas fa-check mr-2"></i>Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+
+
 
 </html>

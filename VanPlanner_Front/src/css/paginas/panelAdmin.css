@@ -3,4 +3,154 @@
 @tailwind utilities;
 
 @layer components {
+    /* Sidebar */
+    .bg-van-dark {
+        background-color: var(--van-secundario-v2);
+    }
+
+    .border-van-dark {
+        border-color: #1a1b1b;
+    }
+
+    /* Enlaces del sidebar */
+    .sidebar-link-active {
+        background-color: var(--van-primario-v1);
+        color: var(--van-secundario-v2);
+    }
+
+    .sidebar-link-active:hover {
+        background-color: var(--van-primario-v2);
+    }
+
+    .sidebar-link {
+        color: #9CA3AF;
+    }
+
+    .sidebar-link:hover {
+        background-color: #374151;
+    }
+
+    /* Botones primarios */
+    .btn-van-admin {
+        background-color: var(--van-primario-v1);
+        color: var(--van-secundario-v2);
+        font-weight: 500;
+    }
+
+    .btn-van-admin:hover {
+        background-color: var(--van-primario-v2);
+        color: var(--van-secundario-v3);
+    }
+
+    /* Botones secundarios */
+    .btn-van-secondary {
+        background-color: var(--van-primario-v2);
+        color: var(--van-secundario-v3);
+    }
+
+    .btn-van-secondary:hover {
+        background-color: #365872;
+    }
+
+    /* Textos y enlaces */
+    .text-van-primary {
+        color: var(--van-primario-v1);
+    }
+
+    .text-van-secondary {
+        color: var(--van-primario-v2);
+    }
+
+    .text-van-primary:hover {
+        color: var(--van-primario-v2);
+    }
+
+    .text-van-secondary:hover {
+        color: #365872;
+    }
+
+    /* Bordes */
+    .border-van-primary {
+        border-color: var(--van-primario-v1);
+    }
+
+    .border-van-secondary {
+        border-color: var(--van-primario-v2);
+    }
+
+    /* Badges/Estados */
+    .bg-van-primary {
+        background-color: var(--van-primario-v1);
+    }
+
+    .bg-van-primary-light {
+        background-color: #fef3cd;
+    }
+
+    .bg-van-secondary {
+        background-color: var(--van-primario-v2);
+    }
+
+    .bg-van-secondary-light {
+        background-color: #e8eef2;
+    }
+
+    /* Focus states para inputs */
+    .focus-van:focus {
+        border-color: var(--van-primario-v1);
+        box-shadow: 0 0 0 3px rgba(249, 186, 50, 0.1);
+    }
+
+    /* Iconos en círculos de colores */
+    .icon-circle-primary {
+        background-color: #fef3cd;
+        color: var(--van-primario-v1);
+    }
+
+    .icon-circle-secondary {
+        background-color: #e8eef2;
+        color: var(--van-primario-v2);
+    }
+
+    /* Estados de éxito/error/advertencia */
+    .bg-van-success {
+        background-color: var(--van-correcto);
+    }
+
+    .bg-van-danger {
+        background-color: var(--van-alerta);
+    }
+
+    .bg-van-warning {
+        background-color: var(--van-aviso);
+    }
+
+    .text-van-success {
+        color: var(--van-correcto);
+    }
+
+    .text-van-danger {
+        color: var(--van-alerta);
+    }
+
+    .text-van-warning {
+        color: var(--van-aviso);
+    }
+
+    /* Sobrescribir colores indigo con colores corporativos */
+    .text-indigo-600 {
+        color: #426E86 !important;
+    }
+
+    .hover\:text-indigo-900:hover {
+        color: #F9BA32 !important;
+    }
+
+    .bg-indigo-600 {
+        background-color: #426E86 !important;
+    }
+
+    .hover\:bg-indigo-700:hover {
+        background-color: #F9BA32 !important;
+    }
 }

@@ -89,6 +89,21 @@ CREATE TABLE `paradas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `recordatorios`
+--
+
+CREATE TABLE `recordatorios` (
+  `id_recordatorio` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `texto` text NOT NULL,
+  `completado` tinyint(1) DEFAULT 0,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fecha_actualizacion` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `rutas`
 --
 
@@ -223,6 +238,13 @@ ALTER TABLE `paradas`
   ADD UNIQUE KEY `uk_viaje_orden` (`viaje_id`,`orden_secuencia`);
 
 --
+-- Indices de la tabla `recordatorios`
+--
+ALTER TABLE `recordatorios`
+  ADD PRIMARY KEY (`id_recordatorio`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
 -- Indices de la tabla `rutas`
 --
 ALTER TABLE `rutas`
@@ -283,6 +305,12 @@ ALTER TABLE `paradas`
   MODIFY `id_parada` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `recordatorios`
+--
+ALTER TABLE `recordatorios`
+  MODIFY `id_recordatorio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `rutas`
 --
 ALTER TABLE `rutas`
@@ -336,6 +364,12 @@ ALTER TABLE `itinerarios`
 --
 ALTER TABLE `paradas`
   ADD CONSTRAINT `paradas_ibfk_1` FOREIGN KEY (`viaje_id`) REFERENCES `viajes` (`id_viaje`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `recordatorios`
+--
+ALTER TABLE `recordatorios`
+  ADD CONSTRAINT `recordatorios_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `rutas`

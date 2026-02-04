@@ -1,0 +1,45 @@
+/* Estilos para días deshabilitados en el calendario */
+.fc-day-disabled {
+    background-color: #f3f4f6 !important;
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed !important;
+}
+
+.fc-day-disabled .fc-daygrid-day-number {
+    color: #9ca3af !important;
+    text-decoration: line-through;
+}
+
+/* Estilos para días habilitados */
+.fc-day-enabled {
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.fc-day-enabled:hover {
+    background-color: #eff6ff !important;
+}
+
+/* Estilos generales del calendario */
+#calendar {
+    font-size: 0.75rem;
+}
+
+.fc .fc-button {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 1rem;
+}
+
+.fc-daygrid-day-number {
+    font-size: 0.7rem;
+}
+
+.fc-event-title {
+    font-size: 0.65rem;
+}

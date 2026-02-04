@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,28 +15,18 @@ import modelo.Usuario;
 import modelo.dao.Dao;
 
 /**
- * Servlet implementaci髇 clase LoginServlet
+ * Servlet implementaci贸n clase LoginServlet
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     
     /**
-     * Identificador 鷑ico de versi髇 para la serializaci髇.
+     * Identificador 煤nico de versi贸n para la serializaci贸n.
      */
     private static final long serialVersionUID = 1L;
-    
-    /**
-     * ID de usuario predefinido.
-     */
-    private final String userID = "abigail.tomcer@gmail.com";
-    
-    /**
-     * Contrase馻 predefinida.
-     */
-    private final String pwd = "abi123";
  
     /**
-     * Maneja las solicitudes HTTP GET para autenticaci髇.
+     * Maneja las solicitudes HTTP GET para autenticaci贸n.
      * 
      * @param request La solicitud HTTP
      * @param response La respuesta HTTP
@@ -49,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        //Obtener los par醡etros de la petici髇 del cliente para el usuario y la contrase馻
+        //Obtener los par谩metros de la petici贸n del cliente para el usuario y la contrase帽a
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
         
@@ -68,7 +57,7 @@ public class LoginServlet extends HttpServlet {
     }
     
     /**
-     * Maneja las solicitudes HTTP POST para autenticaci髇.
+     * Maneja las solicitudes HTTP POST para autenticaci贸n.
      * 
      * @param request La solicitud HTTP
      * @param response La respuesta HTTP
@@ -76,23 +65,29 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException Si ocurre un error de E/S
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	response.setContentType("application/json");
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
-        //Obtener los par醡etros de la petici髇 del cliente para el usuario y la contrase馻
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
         Dao instanciaDao = Dao.getInstancia();
-        
         Usuario usuarioEncontrado = instanciaDao.loginUsuarioCorrecto(usuario, password);
         Gson gson = new Gson();
         
         if (usuarioEncontrado != null) {
-        	PrintWriter pw = response.getWriter();
-            pw.println(gson.toJson(usuarioEncontrado));
-            pw.close();
+            if (!usuarioEncontrado.isActivo()) {
+                // Usuario inactivo/eliminado
+                response.setStatus(403);
+                response.getWriter().write("{\"error\":\"inactivo\",\"mensaje\":\"La cuenta est谩 inactiva o ha sido eliminada.\"}");
+            } else {
+                PrintWriter pw = response.getWriter();
+                pw.println(gson.toJson(usuarioEncontrado));
+                pw.close();
+            }
         } else {
-        	response.sendError(403);
-        } 
+            // Usuario no registrado
+            response.setStatus(404);
+            response.getWriter().write("{\"error\":\"no_registrado\",\"mensaje\":\"El usuario no est谩 registrado o la contrase帽a es incorrecta.\"}");
+        }
     }
 }

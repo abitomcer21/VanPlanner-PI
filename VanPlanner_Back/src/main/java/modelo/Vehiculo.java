@@ -29,6 +29,7 @@ public class Vehiculo {
 		this.capacidad_carga = capacidad_carga;
 	}
 
+	// Getters y setters
 	public int getId_vehiculo() {
 		return id_vehiculo;
 	}

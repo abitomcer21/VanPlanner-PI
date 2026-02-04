@@ -293,6 +293,133 @@ div[class*="space-y-"] > div:last-child {
     min-height: 1.5rem !important;
 }
 
+/* Estilos para el calendario compacto con scroll */
+#calendar {
+    font-size: 0.6rem !important;
+    height: 100% !important;
+    overflow: auto !important;
+}
+
+#calendar .fc {
+    height: 100% !important;
+}
+
+#calendar .fc-view-harness {
+    height: 100% !important;
+    overflow: auto !important;
+}
+
+#calendar .fc-scroller {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+#calendar .fc-toolbar {
+    font-size: 0.65rem !important;
+    padding: 0.25rem !important;
+    flex-shrink: 0;
+}
+
+#calendar .fc-toolbar-title {
+    font-size: 0.75rem !important;
+}
+
+#calendar .fc-button {
+    padding: 0.15rem 0.4rem !important;
+    font-size: 0.6rem !important;
+}
+
+#calendar .fc-col-header-cell {
+    padding: 0.2rem 0 !important;
+    font-size: 0.55rem !important;
+}
+
+#calendar .fc-daygrid-day {
+    font-size: 0.55rem !important;
+}
+
+#calendar .fc-daygrid-day-number {
+    padding: 0.1rem !important;
+    font-size: 0.6rem !important;
+}
+
+#calendar .fc-event {
+    font-size: 0.5rem !important;
+    padding: 0.1rem !important;
+}
+
+#calendar .fc-daygrid-day-frame {
+    min-height: 1.5rem !important;
+}
+
+/* Días de otros meses - mostrarlos atenuados para mantener alineación */
+.fc-day-other {
+    background-color: #f9fafb !important;
+    opacity: 0.3;
+}
+
+.fc-day-other .fc-daygrid-day-number {
+    color: #d1d5db !important;
+    font-size: 0.5rem !important;
+}
+
+.fc-daygrid-day.fc-day-other {
+    pointer-events: none;
+    cursor: default !important;
+}
+
+/* Estilos para días deshabilitados */
+.fc-day-disabled {
+    background-color: #f3f4f6 !important;
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed !important;
+}
+
+.fc-day-disabled .fc-daygrid-day-number {
+    color: #9ca3af !important;
+    text-decoration: line-through;
+}
+
+.fc-day-disabled .fc-daygrid-day-frame {
+    background-color: #e5e7eb !important;
+}
+
+/* Días habilitados dentro del rango */
+.fc-daygrid-day:not(.fc-day-disabled) {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.fc-daygrid-day:not(.fc-day-disabled):hover {
+    background-color: #dbeafe !important;
+}
+
+/* Resaltar días del viaje */
+.fc-day-viaje {
+    background-color: #dbeafe !important;
+    border: 1px solid #3b82f6 !important;
+}
+
+/* Scroll personalizado para el calendario */
+#calendar .fc-scroller::-webkit-scrollbar {
+    width: 6px;
+}
+
+#calendar .fc-scroller::-webkit-scrollbar-track {
+    background: #f7fafc;
+    border-radius: 3px;
+}
+
+#calendar .fc-scroller::-webkit-scrollbar-thumb {
+    background-color: #cbd5e0;
+    border-radius: 3px;
+}
+
+#calendar .fc-scroller::-webkit-scrollbar-thumb:hover {
+    background-color: #a0aec0;
+}
+
 @media (min-width: 640px) {
     #calendar {
         font-size: 0.7rem !important;

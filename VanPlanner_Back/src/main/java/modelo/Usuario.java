@@ -4,8 +4,8 @@ import java.util.Date;
 
 /**
  * Clase que representa a un usuario del sistema.
- * Contiene todos los atributos necesarios para la gestión de usuarios,
- * incluyendo información personal y datos de cuenta.
+ * Contiene todos los atributos necesarios para la gestiÃ³n de usuarios,
+ * incluyendo informaciÃ³n personal y datos de cuenta.
  */
 public class Usuario {
     private int idUsuario;
@@ -31,21 +31,21 @@ public class Usuario {
     }
     
     /**
-     * Constructor completo con todos los parámetros.
+     * Constructor completo con todos los parÃ¡metros.
      * 
-     * @param idUsuario Identificador único del usuario
+     * @param idUsuario Identificador Ãºnico del usuario
      * @param nombreUsuario Nombre de usuario (nickname)
      * @param nombre Nombre real del usuario
      * @param apellidos Apellidos del usuario
      * @param username Nombre de usuario para login
-     * @param email Correo electrónico del usuario
-     * @param contrasenya Contraseña del usuario
+     * @param email Correo electrÃ³nico del usuario
+     * @param contrasenya ContraseÃ±a del usuario
      * @param ciudad Ciudad de residencia del usuario
      * @param fechaNacimiento Fecha de nacimiento del usuario
      * @param sexo Sexo del usuario
      * @param tipoUsuario Tipo de usuario (user/admin)
-     * @param activo Indica si la cuenta está activa
-     * @param aceptaTerminos Indica si aceptó los términos y condiciones
+     * @param activo Indica si la cuenta estÃ¡ activa
+     * @param aceptaTerminos Indica si aceptÃ³ los tÃ©rminos y condiciones
      */
     public Usuario(int idUsuario, String nombreUsuario, String nombre, String apellidos, String username, 
                    String email, String contrasenya, String ciudad, Date fechaNacimiento, 
@@ -71,7 +71,7 @@ public class Usuario {
     /**
      * Obtiene el ID del usuario.
      * 
-     * @return El identificador único del usuario
+     * @return El identificador Ãºnico del usuario
      */
     public int getIdUsuario() {
         return idUsuario;
@@ -80,7 +80,7 @@ public class Usuario {
     /**
      * Establece el ID del usuario.
      * 
-     * @param idUsuario El identificador único del usuario
+     * @param idUsuario El identificador Ãºnico del usuario
      */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
@@ -92,7 +92,7 @@ public class Usuario {
      * @return El nombre de usuario
      */
     public String getNombreUsuario() {
-        return nombre;
+        return nombreUsuario;
     }
     
     /**
@@ -177,18 +177,18 @@ public class Usuario {
     }
     
     /**
-     * Obtiene la contraseña del usuario.
+     * Obtiene la contraseÃ±a del usuario.
      * 
-     * @return La contraseña del usuario
+     * @return La contraseÃ±a del usuario
      */
     public String getContrasenya() {
         return contrasenya;
     }
     
     /**
-     * Establece la contraseña del usuario.
+     * Establece la contraseÃ±a del usuario.
      * 
-     * @param contrasenya La contraseña del usuario
+     * @param contrasenya La contraseÃ±a del usuario
      */
     public void setContrasenya(String contrasenya) {
         this.contrasenya = contrasenya;
@@ -268,9 +268,9 @@ public class Usuario {
     }
     
     /**
-     * Verifica si el usuario está activo.
+     * Verifica si el usuario estÃ¡ activo.
      * 
-     * @return true si el usuario está activo, false en caso contrario
+     * @return true si el usuario estÃ¡ activo, false en caso contrario
      */
     public boolean isActivo() {
         return activo;
@@ -286,25 +286,25 @@ public class Usuario {
     }
     
     /**
-     * Verifica si el usuario aceptó los términos y condiciones.
+     * Verifica si el usuario aceptÃ³ los tÃ©rminos y condiciones.
      * 
-     * @return true si aceptó los términos, false en caso contrario
+     * @return true si aceptÃ³ los tÃ©rminos, false en caso contrario
      */
     public boolean isAceptaTerminos() {
         return aceptaTerminos;
     }
     
     /**
-     * Establece la aceptación de términos y condiciones.
+     * Establece la aceptaciÃ³n de tÃ©rminos y condiciones.
      * 
-     * @param aceptaTerminos true si acepta los términos, false en caso contrario
+     * @param aceptaTerminos true si acepta los tÃ©rminos, false en caso contrario
      */
     public void setAceptaTerminos(boolean aceptaTerminos) {
         this.aceptaTerminos = aceptaTerminos;
     }
     
     /**
-     * Devuelve una representación en cadena del objeto Usuario.
+     * Devuelve una representaciÃ³n en cadena del objeto Usuario.
      * 
      * @return Cadena que representa al usuario con sus principales atributos
      */

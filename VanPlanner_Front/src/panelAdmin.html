@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/formulario.css">
     <link rel="stylesheet" href="css/paginas/login.css">
+    <link rel="stylesheet" href="css/paginas/panelAdmin.css">
 
 
 
@@ -21,8 +22,8 @@
 
 <body class="bg-gray-50">
     <div class="flex h-screen">
-        <aside class="w-64 bg-gray-900 text-white flex flex-col">
-            <div class="p-6 border-b border-gray-800">
+        <aside class="w-64 text-white flex flex-col" style="background-color: #2F3131;">
+            <div class="p-6 border-b" style="border-color: #426E86;">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 flex items-center justify-center">
                         <img src="assets/images/logoAplicacion.png" alt="VanPlanner">
@@ -36,33 +37,33 @@
             <nav class="flex-1 p-4 overflow-y-auto sidebar">
                 <ul class="space-y-2">
                     <li>
-                        <a href="#" class="flex items-center p-3 rounded-lg bg-indigo-600 text-white">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-white" style="background-color: #426E86;">
                             <i class="fas fa-tachometer-alt w-6"></i>
                             <span class="ml-3">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-800 text-gray-300">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300" style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#426E86'" onmouseout="this.style.backgroundColor='transparent'">
                             <i class="fas fa-users w-6"></i>
                             <span class="ml-3">Usuarios</span>
-                            <span class="ml-auto bg-gray-700 text-xs px-2 py-1 rounded">24</span>
+                            <span class="ml-auto text-xs px-2 py-1 rounded" style="background-color: #426E86;">24</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-800 text-gray-300">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300" style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#426E86'" onmouseout="this.style.backgroundColor='transparent'">
                             <i class="fas fa-route w-6"></i>
                             <span class="ml-3">Rutas</span>
-                            <span class="ml-auto bg-gray-700 text-xs px-2 py-1 rounded">156</span>
+                            <span class="ml-auto text-xs px-2 py-1 rounded" style="background-color: #426E86;">156</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-800 text-gray-300">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300" style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#426E86'" onmouseout="this.style.backgroundColor='transparent'">
                             <i class="fas fa-campground w-6"></i>
                             <span class="ml-3">Puntos de interés</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-800 text-gray-300">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300" style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#426E86'" onmouseout="this.style.backgroundColor='transparent'">
                             <i class="fas fa-chart-bar w-6"></i>
                             <span class="ml-3">Estadísticas</span>
                         </a>
@@ -71,7 +72,7 @@
                         <p class="px-3 text-xs uppercase text-gray-500 font-semibold">Configuración</p>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-800 text-gray-300">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300" style="transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#426E86'" onmouseout="this.style.backgroundColor='transparent'">
                             <i class="fas fa-cog w-6"></i>
                             <span class="ml-3">Ajustes</span>
                         </a>
@@ -79,15 +80,15 @@
                 </ul>
             </nav>
 
-            <div class="p-4 border-t border-gray-800">
+            <div class="p-4 border-t" style="border-color: #426E86;">
                 <div class="flex items-center">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=4f46e5&color=fff" alt="Admin"
-                        class="w-10 h-10 rounded-full">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=F9BA32&color=2F3131&v=2" alt="Admin"
+                        class="bg-whitew-10 h-10 rounded-full">
                     <div class="ml-3">
                         <p class="font-medium">Admin User</p>
                         <p class="text-xs text-gray-400">Administrador</p>
                     </div>
-                    <a href="index.html" class="ml-auto text-gray-400 hover:text-white">
+                    <a href="index.html" class="ml-auto hover:text-white" style="color: #F9BA32;">
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </div>
@@ -113,14 +114,14 @@
             </header>
 
             <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-blue-500">
+                <div class="bg-white rounded-xl shadow p-5 border-l-4" style="border-color: #426E86;">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm">Total Usuarios</p>
-                            <p class="text-3xl font-bold mt-1">2,847</p>
+                            <p id="total-usuarios" class="text-3xl font-bold mt-1">0</p>
                         </div>
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-users text-blue-600 text-xl"></i>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: rgba(66, 110, 134, 0.1);">
+                            <i class="fas fa-users text-xl" style="color: #426E86;"></i>
                         </div>
                     </div>
                     <p class="text-green-600 text-sm mt-2">
@@ -128,14 +129,14 @@
                     </p>
                 </div>
 
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-green-500">
+                <div class="bg-white rounded-xl shadow p-5 border-l-4" style="border-color: #F9BA32;">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm">Usuarios Activos</p>
-                            <p class="text-3xl font-bold mt-1">1,924</p>
+                            <p id="usuarios-activos" class="text-3xl font-bold mt-1">0</p>
                         </div>
-                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user-check text-green-600 text-xl"></i>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: rgba(249, 186, 50, 0.1);">
+                            <i class="fas fa-user-check text-xl" style="color: #F9BA32;"></i>
                         </div>
                     </div>
                     <p class="text-green-600 text-sm mt-2">
@@ -143,14 +144,14 @@
                     </p>
                 </div>
 
-                <div class="bg-white rounded-xl shadow p-5 border-l-4 border-yellow-500">
+                <div class="bg-white rounded-xl shadow p-5 border-l-4" style="border-color: #426E86;">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm">Nuevos Hoy</p>
-                            <p class="text-3xl font-bold mt-1">42</p>
+                            <p id="nuevos-hoy" class="text-3xl font-bold mt-1">0</p>
                         </div>
-                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user-plus text-yellow-600 text-xl"></i>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: rgba(66, 110, 134, 0.1);">
+                            <i class="fas fa-user-plus text-xl" style="color: #426E86;"></i>
                         </div>
                     </div>
                     <p class="text-red-600 text-sm mt-2">
@@ -169,7 +170,7 @@
                                 <i class="fas fa-filter mr-2"></i> Filtrar
                             </button>
                             <button id="btnNuevoUsuario"
-                                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium flex items-center">
+                                class="px-4 py-2 text-white rounded-lg font-medium flex items-center" style="background-color: #426E86; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#F9BA32'" onmouseout="this.style.backgroundColor='#426E86'">
                                 <i class="fas fa-plus mr-2"></i> Nuevo Usuario
                             </button>
                         </div>
@@ -271,7 +272,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <button class="text-indigo-600 hover:text-indigo-900 mr-3 btn-editar">
+                                        <button class="mr-3 btn-editar" style="color: #426E86; transition: color 0.2s;" onmouseover="this.style.color='#F9BA32'" onmouseout="this.style.color='#426E86'">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="text-red-600 hover:text-red-900 mr-3">
@@ -333,13 +334,13 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                        <input type="text"
+                        <input type="text" id="nombre" name="nombre"
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Apellidos</label>
-                        <input type="text"
+                        <input type="text" id="apellidos" name="apellidos"
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                     </div>
@@ -347,35 +348,35 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email"
+                    <input type="email" id="email" name="email"
                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                         required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario</label>
-                    <input type="text"
+                    <input type="text" id="username" name="username"
                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                         required>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-                    <input type="password"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                        required>
-                </div>
+                <!-- Campo de contraseña eliminado -->
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Rol</label>
-                    <select
+                    <select id="tipoUsuario" name="tipoUsuario"
                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                         <option value="user">Usuario</option>
                         <option value="admin">Administrador</option>
-                        <option value="moderator">Moderador</option>
                     </select>
                 </div>
 
+                <div>
+                    <label class="inline-flex items-center mt-2">
+                        <input type="checkbox" id="activoUsuario" name="activoUsuario" class="form-checkbox h-5 w-5 text-indigo-600" checked>
+                        <span class="ml-2 text-gray-700">Activo</span>
+                    </label>
+                </div>
                 <div class="flex justify-end space-x-3 pt-4">
                     <button type="button" id="btnCancelar"
                         class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
@@ -386,6 +387,19 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+
+    <!-- Modal de confirmación para eliminar usuario -->
+    <div id="modalConfirmarEliminar" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full">
+            <h2 class="text-lg font-semibold mb-4">Confirmar eliminación</h2>
+            <p id="textoConfirmarEliminar" class="mb-6">¿Vas a eliminar al usuario <span class="font-bold"></span>?</p>
+            <div class="flex justify-end space-x-3">
+                <button id="btnCancelarEliminar" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Cancelar</button>
+                <button id="btnConfirmarEliminar" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Eliminar</button>
+            </div>
         </div>
     </div>
 

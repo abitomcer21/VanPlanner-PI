@@ -36,9 +36,18 @@ public class ObtenerVehiculosServlet extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		
+		String usuarioIdStr = request.getParameter("usuario_id");
+		
+		if (usuarioIdStr == null || usuarioIdStr.isEmpty()) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.getWriter().println("{\"error\": \"Falta el parámetro usuario_id\"}");
+			return;
+		}
+		
+		int usuarioId = Integer.parseInt(usuarioIdStr);
 		Dao instanciaDao = Dao.getInstancia();
 		
-		ArrayList<Vehiculo> listadoVehiculos = instanciaDao.obtenerVehiculos();
+		ArrayList<Vehiculo> listadoVehiculos = instanciaDao.obtenerVehiculos(usuarioId);
 		Gson gson = new Gson();
 		
 		PrintWriter pw = response.getWriter();

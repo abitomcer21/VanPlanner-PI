@@ -2,6 +2,8 @@ let map;
 let autocomplete;
 let markers = [];
 let puntosGuardados = [];
+let markerOrigen = null; // Marcador del origen
+let markerDestino = null; // Marcador del destino
 
 
 const categorias = {
@@ -99,12 +101,18 @@ function mostrarLugar(place) {
     const infoWindow = new google.maps.InfoWindow({
         content: crearVentanaInfo(place)
     });
+    
+    // Guardar referencia del InfoWindow en el marker
+    marker.infoWindow = infoWindow;
 
     infoWindow.open(map, marker);
 
     map.addListener('click', function () {
         infoWindow.close();
     });
+    
+    // Preguntar si añadir como origen o destino
+    preguntarOrigenDestino(place);
 }
 
 function crearVentanaInfo(place) {
@@ -113,21 +121,16 @@ function crearVentanaInfo(place) {
     const lat = place.geometry.location.lat();
     const lng = place.geometry.location.lng();
     const tipo = determinarTipo(place);
-    const categoria = categorias[tipo] || 'categoria-otros';
 
     return `
         <div style="padding: 15px; min-width: 250px;">
             <h3 style="margin: 0 0 8px 0; font-weight: bold;">${nombre}</h3>
             <p style="margin: 0 0 10px 0; font-size: 12px; color: #666;">${direccion}</p>
-            <p style="margin: 0 0 10px 0; font-size: 12px;">
-                <strong>Tipo:</strong> ${tipo}<br>
-                <strong>Categoría:</strong> ${categoria.replace('categoria-', '')}
-            </p>
             
             <div style="display: flex; gap: 8px; margin-top: 15px;">
                 <button onclick="anadirPunto('${place.place_id}', '${nombre.replace(/'/g, "\\'")}', '${direccion.replace(/'/g, "\\'")}', ${lat}, ${lng}, '${tipo}')"
                         style="flex: 1; background: #3b82f6; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">
-                    Añadir a ${tipo}
+                    <i class="fas fa-plus mr-2"></i>Añadir al itinerario
                 </button>
                 <button onclick="cerrarVentana()"
                         style="background: #94a3b8; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; cursor: pointer;">
@@ -187,10 +190,11 @@ function determinarTipo(place) {
 }
 
 async function anadirPunto(placeId, nombre, direccion, lat, lng, tipo) {
-    console.log("Añadiendo:", nombre, "| Tipo:", tipo);
+    console.log("Preparando añadir:", nombre, "| Tipo:", tipo);
 
-    const punto = {
-        id: placeId,
+    // Almacenar datos del punto temporalmente
+    window.puntoTemporal = {
+        placeId: placeId,
         nombre: nombre,
         direccion: direccion,
         lat: lat,
@@ -198,14 +202,12 @@ async function anadirPunto(placeId, nombre, direccion, lat, lng, tipo) {
         tipo: tipo
     };
 
-    puntosGuardados.push(punto);
-
-    // TODO: Implementar correctamente
-    await sendAddParadaRequest(punto);
-
-    anadirPuntoVisual(punto);
-    guardarPuntos();
-    cerrarVentana();
+    // Abrir el popup para añadir el punto de interés (ahora gestionado en editarViaje.js)
+    if (typeof abrirPopupPuntoInteres === 'function') {
+        abrirPopupPuntoInteres();
+    } else {
+        console.error("La función abrirPopupPuntoInteres no está definida.");
+    }
 }
 
 async function sendAddParadaRequest(data) {
@@ -329,9 +331,278 @@ function buscarLugar(query) {
     });
 }
 
+// Función para preguntar si añadir el lugar como origen o destino
+function preguntarOrigenDestino(place) {
+    const inputOrigen = document.getElementById('input-origen');
+    const inputDestino = document.getElementById('input-destino');
+    
+    if (!inputOrigen || !inputDestino) {
+        console.error('No se encontraron los campos de origen/destino');
+        return;
+    }
+    
+    const nombreLugar = place.name || place.formatted_address || 'este lugar';
+    
+    // Si no hay origen, preguntar si añadir como origen
+    if (!inputOrigen.value) {
+        if (confirm(`¿Añadir "${nombreLugar}" como ORIGEN del viaje?`)) {
+            inputOrigen.value = nombreLugar;
+            console.log('Origen establecido:', nombreLugar);
+            
+            // Eliminar marcador de origen anterior si existe
+            if (markerOrigen) {
+                markerOrigen.setMap(null);
+            }
+            
+            // Crear nuevo marcador de origen (verde/azul)
+            markerOrigen = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                title: 'Origen: ' + nombreLugar,
+                label: {
+                    text: 'A',
+                    color: 'white',
+                    fontSize: '14px',
+                    fontWeight: 'bold'
+                },
+                icon: {
+                    url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                }
+            });
+            
+            // Verificar si se puede habilitar el botón
+            if (typeof window.verificarCamposCompletos === 'function') {
+                window.verificarCamposCompletos();
+            }
+        }
+    }
+    // Si hay origen pero no destino, preguntar si añadir como destino
+    else if (!inputDestino.value) {
+        if (confirm(`¿Añadir "${nombreLugar}" como DESTINO del viaje?`)) {
+            inputDestino.value = nombreLugar;
+            console.log('Destino establecido:', nombreLugar);
+            
+            // Eliminar marcador de destino anterior si existe
+            if (markerDestino) {
+                markerDestino.setMap(null);
+            }
+            
+            // Crear nuevo marcador de destino (rojo)
+            markerDestino = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                title: 'Destino: ' + nombreLugar,
+                label: {
+                    text: 'B',
+                    color: 'white',
+                    fontSize: '14px',
+                    fontWeight: 'bold'
+                },
+                icon: {
+                    url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                }
+            });
+            
+            // Ajustar el mapa para mostrar ambos marcadores
+            if (markerOrigen && markerDestino) {
+                const bounds = new google.maps.LatLngBounds();
+                bounds.extend(markerOrigen.getPosition());
+                bounds.extend(markerDestino.getPosition());
+                map.fitBounds(bounds);
+            }
+            
+            // Habilitar los campos de fecha cuando origen y destino estén establecidos
+            habilitarCamposFecha();
+            
+            // Verificar si se puede habilitar el botón
+            if (typeof window.verificarCamposCompletos === 'function') {
+                window.verificarCamposCompletos();
+            }
+        }
+    }
+}
+
+// Función para habilitar los campos de fecha
+function habilitarCamposFecha() {
+    const fechaInicio = document.getElementById('fecha-inicio');
+    const fechaFin = document.getElementById('fecha-fin');
+    
+    if (fechaInicio) {
+        fechaInicio.disabled = false;
+        fechaInicio.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+    
+    if (fechaFin) {
+        fechaFin.disabled = false;
+        fechaFin.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+    
+    console.log('Campos de fecha habilitados');
+}
+
+// Funciones para manejar el popup de punto de interés
+function abrirPopupPuntoInteres() {
+    const popup = document.getElementById('popup-punto-interes');
+    if (!popup) return;
+    
+    // Obtener fechas del viaje
+    const fechaInicio = document.getElementById('fecha-inicio');
+    const fechaFin = document.getElementById('fecha-fin');
+    const fechaActividad = document.getElementById('fecha-actividad');
+    
+    if (fechaInicio && fechaFin && fechaActividad) {
+        // Establecer min y max para la fecha de actividad
+        fechaActividad.min = fechaInicio.value;
+        fechaActividad.max = fechaFin.value;
+        fechaActividad.value = fechaInicio.value; // Valor por defecto
+    }
+    
+    // Preseleccionar la categoría detectada automáticamente
+    if (window.puntoTemporal && window.puntoTemporal.tipo) {
+        const selectCategoria = document.getElementById('categoria-punto');
+        if (selectCategoria) {
+            selectCategoria.value = window.puntoTemporal.tipo;
+        }
+    }
+    
+    // Limpiar mensajes de error
+    document.getElementById('error-fecha').classList.add('hidden');
+    document.getElementById('error-hora').classList.add('hidden');
+    
+    // Mostrar popup
+    popup.classList.remove('hidden');
+    popup.classList.add('flex');
+}
+
+function cerrarPopupPuntoInteres() {
+    const popup = document.getElementById('popup-punto-interes');
+    if (!popup) return;
+    
+    popup.classList.add('hidden');
+    popup.classList.remove('flex');
+    
+    // Limpiar formulario
+    document.getElementById('form-punto-interes').reset();
+    window.puntoTemporal = null;
+}
+
+function obtenerColorCategoria(categoria) {
+    const colores = {
+        'hotel': '#9333ea',
+        'restaurante': '#2563eb',
+        'monumento': '#dc2626',
+        'naturaleza': '#16a34a',
+        'compras': '#ea580c',
+        'transporte': '#0891b2',
+        'otro': '#6b7280'
+    };
+    return colores[categoria] || '#3788d8';
+}
+function obtenerIconoPorTipo(tipo) {
+    const iconos = {
+        'hotel': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+        'restaurante': 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png',
+        'monumento': 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
+        'naturaleza': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+        'compras': 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png',
+        'transporte': 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+        'parking': 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png',
+        'otro': 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+    };
+    
+    return iconos[tipo] || iconos['otro'];
+}
+
 window.initMap = initMap;
 window.anadirPunto = anadirPunto;
 window.cerrarVentana = cerrarVentana;
 window.eliminarPunto = eliminarPunto;
+window.cerrarPopupPuntoInteres = cerrarPopupPuntoInteres;
+window.abrirPopupPuntoInteres = abrirPopupPuntoInteres;
+window.puntosGuardados = puntosGuardados; // Exponer array de puntos
+
+// Función para calcular distancia entre origen y destino
+// Puede recibir coordenadas directamente o nombres de lugares
+function calcularDistanciaTotal(origen, destino, coordOrigen = null, coordDestino = null) {
+    return new Promise((resolve, reject) => {
+        // Si ya tenemos coordenadas, calcular directamente
+        if (coordOrigen && coordDestino && coordOrigen.lat && coordOrigen.lng && coordDestino.lat && coordDestino.lng) {
+            console.log('Calculando con coordenadas directas:', coordOrigen, coordDestino);
+            const distanciaKm = calcularDistanciaHaversine(
+                coordOrigen.lat,
+                coordOrigen.lng,
+                coordDestino.lat,
+                coordDestino.lng
+            );
+            console.log('Distancia calculada:', distanciaKm, 'km');
+            resolve(distanciaKm);
+            return;
+        }
+        
+        if (!origen || !destino) {
+            console.log('Origen o destino vacíos');
+            resolve(0);
+            return;
+        }
+
+        console.log('Valores para geocoding:', { origen, destino });
+        
+        // Limpiar y normalizar los nombres (quitar espacios extra, etc)
+        origen = origen.trim();
+        destino = destino.trim();
+        
+        console.log('Calculando distancia con Geocoding:', { origen, destino });
+        const geocoder = new google.maps.Geocoder();
+        
+        // Geocodificar origen
+        geocoder.geocode({ address: origen }, (results1, status1) => {
+            console.log('Resultado geocoding origen:', status1, results1);
+            if (status1 === 'OK' && results1[0]) {
+                const coordOrigen = results1[0].geometry.location;
+                
+                // Geocodificar destino
+                geocoder.geocode({ address: destino }, (results2, status2) => {
+                    console.log('Resultado geocoding destino:', status2, results2);
+                    if (status2 === 'OK' && results2[0]) {
+                        const coordDestino = results2[0].geometry.location;
+                        
+                        // Calcular distancia usando fórmula de Haversine
+                        const distanciaKm = calcularDistanciaHaversine(
+                            coordOrigen.lat(),
+                            coordOrigen.lng(),
+                            coordDestino.lat(),
+                            coordDestino.lng()
+                        );
+                        
+                        console.log('Distancia calculada:', distanciaKm, 'km');
+                        resolve(distanciaKm);
+                    } else {
+                        console.error('Error geocodificando destino:', status2);
+                        resolve(0);
+                    }
+                });
+            } else {
+                console.error('Error geocodificando origen:', status1);
+                resolve(0);
+            }
+        });
+    });
+}
+
+// Fórmula de Haversine para calcular distancia entre dos puntos
+function calcularDistanciaHaversine(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radio de la Tierra en km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distancia = R * c;
+    return Math.round(distancia);
+}
+
+// Exponer función globalmente
+window.calcularDistanciaTotal = calcularDistanciaTotal;
 
 console.log("Sistema listo con 7 categorías diferentes");

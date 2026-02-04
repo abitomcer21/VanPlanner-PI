@@ -23,6 +23,52 @@ function inicializar() {
     inputContrasenaElement = document.getElementById('contrasenaInput');
     inputConfirmarContrasenaElement = document.getElementById('confirmarContrasenaInput');
 
+    // Funcionalidad para mostrar/ocultar contraseñas
+    inicializarTogglePassword();
+}
+
+// Función para mostrar/ocultar contraseñas
+function inicializarTogglePassword() {
+    const togglePassword = document.getElementById('togglePassword');
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const passwordInput = document.getElementById('contrasenaInput');
+    const confirmPasswordInput = document.getElementById('confirmarContrasenaInput');
+    const iconPassword = document.getElementById('iconPassword');
+    const iconConfirmPassword = document.getElementById('iconConfirmPassword');
+
+    // Toggle para contraseña
+    if (togglePassword) {
+        togglePassword.addEventListener('click', function() {
+            const tipo = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', tipo);
+            
+            // Cambiar icono
+            if (tipo === 'text') {
+                iconPassword.classList.remove('bi-eye-slash');
+                iconPassword.classList.add('bi-eye');
+            } else {
+                iconPassword.classList.remove('bi-eye');
+                iconPassword.classList.add('bi-eye-slash');
+            }
+        });
+    }
+
+    // Toggle para confirmar contraseña
+    if (toggleConfirmPassword) {
+        toggleConfirmPassword.addEventListener('click', function() {
+            const tipo = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', tipo);
+            
+            // Cambiar icono
+            if (tipo === 'text') {
+                iconConfirmPassword.classList.remove('bi-eye-slash');
+                iconConfirmPassword.classList.add('bi-eye');
+            } else {
+                iconConfirmPassword.classList.remove('bi-eye');
+                iconConfirmPassword.classList.add('bi-eye-slash');
+            }
+        });
+    }
 }
 
 // Validación de formulario
@@ -46,17 +92,45 @@ async function registrarseClick(event) {
 
         console.log('Registro validado correctamente');
 
+
+        // Formatear fechaNacimiento a 'YYYY-MM-DD' antes de enviar
+        if (usuario.fechaNacimiento instanceof Date && !isNaN(usuario.fechaNacimiento)) {
+            const year = usuario.fechaNacimiento.getFullYear();
+            const month = String(usuario.fechaNacimiento.getMonth() + 1).padStart(2, '0');
+            const day = String(usuario.fechaNacimiento.getDate()).padStart(2, '0');
+            usuario.fechaNacimiento = `${year}-${month}-${day}`;
+        }
+
         const response = await sendRegistroRequest(usuario);
 
         if (response.status === 200) {
             showNotification('Registro exitoso', 'success');
-
             setTimeout(() => {
                 window.location.href = 'inicioSesion.html';
             }, 1500);
-
         } else {
-            alert('Registro ha fallado');
+            // Intentar leer el error del backend
+            let errorMsg = 'Registro ha fallado';
+            try {
+                const data = await response.json();
+                if (data && data.error && data.error.includes('Duplicate entry') && data.error.includes('username')) {
+                    errorMsg = 'El nombre de usuario ya existe. Por favor, elige otro.';
+                    // Mostrar el error cerca del campo username si existe
+                    const errorUserNameElement = document.getElementById('errorUsername');
+                    if (errorUserNameElement) {
+                        errorUserNameElement.innerHTML = errorMsg;
+                    } else {
+                        alert(errorMsg);
+                    }
+                } else if (data && data.error) {
+                    errorMsg = data.error;
+                    alert(errorMsg);
+                } else {
+                    alert(errorMsg);
+                }
+            } catch (e) {
+                alert(errorMsg);
+            }
         }
 
     } else {
