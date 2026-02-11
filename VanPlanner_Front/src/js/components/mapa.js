@@ -606,3 +606,18 @@ function calcularDistanciaHaversine(lat1, lon1, lat2, lon2) {
 window.calcularDistanciaTotal = calcularDistanciaTotal;
 
 console.log("Sistema listo con 7 categorías diferentes");
+
+window.mapa = window.mapa || {};
+
+window.mapa.mostrarPuntosViajes = function(puntos) {
+    if (!map) return;
+    puntos.forEach(punto => {
+        const marker = new google.maps.Marker({
+            map: map,
+            position: { lat: punto.lat, lng: punto.lng },
+            title: punto.ciudad,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        });
+        markers.push(marker);
+    });
+};

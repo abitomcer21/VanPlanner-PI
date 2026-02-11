@@ -140,6 +140,7 @@ function mostrarDatosViaje(viaje) {
         console.error('No se encontró input-destino');
     }
 
+
     // Disparar el cálculo de distancia DESPUÉS de rellenar los campos
     setTimeout(() => {
         esperarGoogleMapsYCalcularDistancia();
@@ -1382,3 +1383,34 @@ window.abrirPopupPuntoInteres = abrirPopupPuntoInteres;
 window.cerrarPopupPuntoInteres = cerrarPopupPuntoInteres;
 window.guardarViaje = guardarViaje;
 window.cerrarPopupExito = cerrarPopupExito;
+
+// Mostrar puntos de origen y destino en el mapa si existen valores
+function mostrarPuntosOrigenDestino() {
+    const inputOrigen = document.getElementById('input-origen');
+    const inputDestino = document.getElementById('input-destino');
+    if (!window.mapa || !window.mapa.mostrarPuntosViajes || !inputOrigen || !inputDestino) return;
+    const puntos = [];
+    if (inputOrigen.value) puntos.push({ ciudad: inputOrigen.value });
+    if (inputDestino.value) puntos.push({ ciudad: inputDestino.value });
+    const geocoder = new google.maps.Geocoder();
+    Promise.all(puntos.map(punto => new Promise(resolve => {
+        geocoder.geocode({ address: punto.ciudad }, (results, status) => {
+            if (status === 'OK' && results[0]) {
+                punto.lat = results[0].geometry.location.lat();
+                punto.lng = results[0].geometry.location.lng();
+            }
+            resolve();
+        });
+    }))).then(() => {
+        const puntosConCoords = puntos.filter(p => p.lat && p.lng);
+        window.mapa.mostrarPuntosViajes(puntosConCoords);
+    });
+}
+
+// Llama a la función cuando cambian los campos de origen o destino
+['input-origen', 'input-destino'].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) {
+        input.addEventListener('change', mostrarPuntosOrigenDestino);
+    }
+});

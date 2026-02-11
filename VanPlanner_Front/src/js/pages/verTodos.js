@@ -1,9 +1,17 @@
-document.addEventListener('DOMContentLoaded', inicializar);
 
-function inicializar() {
-    cargarNombre();
-    cargarViajes();
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Espera a que el headerLoggeado se cargue antes de continuar
+    const esperarHeader = () => {
+        const nombreSpan = document.getElementById('nombreUsuario');
+        if (nombreSpan) {
+            cargarNombre();
+            cargarViajes();
+        } else {
+            setTimeout(esperarHeader, 50);
+        }
+    };
+    esperarHeader();
+});
 
 function cargarNombre() {
     let usuarioJson = localStorage.getItem('usuario');

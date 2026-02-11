@@ -1,0 +1,111 @@
+/* Estilos responsive para panelAdmin (solo móvil, sin afectar escritorio) */
+@media (max-width: 768px) {
+  /* Sidebar oculto y menú hamburguesa */
+  #sidebar {
+    position: fixed;
+    left: -100vw;
+    width: 70vw;
+    min-width: 220px;
+    max-width: 320px;
+    z-index: 50;
+    transition: left 0.3s;
+    height: 100vh;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+  }
+  #sidebar.open {
+    left: 0;
+  }
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 40;
+  }
+  /* Botón hamburguesa visible */
+  .btn-hamburger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #426E86;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  /* Ajuste header */
+  header {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  /* Quitar margen lateral del contenido */
+  .md\:ml-64 {
+    margin-left: 0 !important;
+  }
+  /* Permitir scroll vertical en móvil */
+  html, body {
+    height: 100vh;
+    overflow-y: auto !important;
+  }
+  .flex.h-screen {
+    height: auto !important;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  .flex-1.flex.flex-col.overflow-hidden.md\:ml-64 {
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 100vh;
+  }
+  main.flex-1.overflow-y-auto.p-6 {
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 60vh;
+  }
+  /* Tarjetas resumen: grid a 1 columna */
+  .grid-cols-1, .md\:grid-cols-2, .lg\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+  /* Tabla: scroll horizontal y tamaño fuente menor */
+  table.min-w-full {
+    font-size: 0.92rem;
+    min-width: 600px;
+  }
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  /* Modal: ancho casi total */
+  #modalUsuario > div,
+  #modalConfirmarEliminar > div {
+    width: 98vw !important;
+    min-width: unset !important;
+    max-width: 99vw !important;
+    left: 1vw !important;
+    right: 1vw !important;
+    padding: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajustes extra para móviles pequeños */
+  header h2 {
+    font-size: 1.1rem !important;
+  }
+  header p {
+    font-size: 0.95rem !important;
+  }
+  .p-6 {
+    padding: 1rem !important;
+  }
+  .px-6 {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+  .py-4 {
+    padding-top: 0.7rem !important;
+    padding-bottom: 0.7rem !important;
+  }
+}

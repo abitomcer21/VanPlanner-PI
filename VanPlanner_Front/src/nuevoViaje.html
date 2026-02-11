@@ -42,7 +42,7 @@
 </head>
 
 <body class="min-h-screen bg-gray-100 overflow-hidden">
-    <div class="min-h-screen flex flex-col">
+    <div class="min-h-screen flex flex-col overflow-y-auto">
         <header class="bg-van-primario-v2 py-0.5 shadow-md">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-3 items-center">
@@ -98,11 +98,36 @@
                 </div>
             </div>
         </header>
-        <main class="flex-1 overflow-hidden">
-            <div class="h-full w-full px-2 sm:px-4 lg:px-8 xl:px-12 2xl:px-16 py-2 sm:py-4">
-                <div class="h-full grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4">
+        <main class="flex-1 overflow-y-auto lg:overflow-hidden">
+            <div class="h-full w-full px-1 sm:px-2 md:px-4 lg:px-8 xl:px-12 2xl:px-16 py-1 sm:py-2 md:py-4">
+                <!-- Bloque de Origen, Destino y Fechas SOLO en móvil -->
+                <div class="block md:hidden w-full max-w-3xl mx-auto mb-4">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex gap-2">
+                            <div class="flex-1">
+                                <label for="origen-principal" class="block text-sm font-medium text-gray-700">Origen</label>
+                                <input type="text" id="origen-principal" name="origen-principal" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="Ciudad de origen">
+                            </div>
+                            <div class="flex-1">
+                                <label for="destino-principal" class="block text-sm font-medium text-gray-700">Destino</label>
+                                <input type="text" id="destino-principal" name="destino-principal" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="Ciudad de destino">
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <div class="flex-1">
+                                <label for="fecha-inicio-principal" class="block text-sm font-medium text-gray-700">Fecha de inicio</label>
+                                <input type="date" id="fecha-inicio-principal" name="fecha-inicio-principal" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                            </div>
+                            <div class="flex-1">
+                                <label for="fecha-fin-principal" class="block text-sm font-medium text-gray-700">Fecha de fin</label>
+                                <input type="date" id="fecha-fin-principal" name="fecha-fin-principal" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-2 sm:gap-4">
 
-                    <div class="lg:col-span-3 h-full flex flex-col bg-blue-50 rounded-xl shadow-md">
+                    <div class="lg:col-span-3 md:col-span-1 h-full flex flex-col bg-blue-50 rounded-xl shadow-md min-h-[350px]">
                         <div class="p-3 border-b border-blue-100">
                             <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center">
                                 <i class="fas fa-cog text-blue-600 mr-2"></i> CONFIGURACIÓN
@@ -268,7 +293,7 @@
                         </div>
                     </div>
 
-                    <div class="lg:col-span-6 h-full flex flex-col space-y-2 sm:space-y-4">
+                    <div class="lg:col-span-6 md:col-span-1 h-full flex flex-col space-y-2 sm:space-y-4 min-h-[350px]">
                         <!--Mapa - 2/3 de la altura-->
                         <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col"
                             style="height: 66.666%;">
@@ -398,7 +423,7 @@
                         </div>
 
                     </div>
-                    <div class="lg:col-span-3 h-full flex flex-col space-y-2 sm:space-y-4">
+                    <div class="lg:col-span-3 md:col-span-2 h-full flex flex-col space-y-2 sm:space-y-4 min-h-[350px]">
                         <div class="flex-1 min-h-[200px] bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
                             <div class="p-4 border-b border-gray-200">
                                 <div class="flex justify-between items-center">

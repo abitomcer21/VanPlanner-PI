@@ -1,15 +1,47 @@
+/* Calendario responsive en móvil */
+#calendar {
+    min-width: 0;
+    width: 100% !important;
+    max-width: 100vw;
+    font-size: 1rem !important;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+@media (min-width: 640px) {
+    #calendar {
+        font-size: 1.1rem !important;
+        min-height: 13rem;
+    }
+}
+@media (min-width: 768px) {
+    #calendar {
+        font-size: 1.2rem !important;
+        min-height: 15rem;
+    }
+}
+/* Mostrar el bloque de origen/destino/fechas solo en móvil */
+.sticky.top-0.z-30.bg-white.shadow-md.rounded-b-xl.px-3.py-2.mb-2 {
+    display: block;
+}
+@media (min-width: 768px) {
+    .sticky.top-0.z-30.bg-white.shadow-md.rounded-b-xl.px-3.py-2.mb-2 {
+        display: none !important;
+    }
+}
 html, body {
-    height: 100%;
+    height: 100vh;
+    min-height: 0;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .min-h-screen.flex.flex-col {
     height: 100vh;
+    min-height: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
 header {
@@ -17,9 +49,9 @@ header {
 }
 
 main {
-    flex: 1;
-    overflow: hidden;
+    flex: 1 1 0%;
     min-height: 0;
+    overflow-y: auto;
 }
 
 main > div {
@@ -57,6 +89,12 @@ main > div {
     min-height: 400px;
 }
 
+@media (min-width: 768px) {
+    main > div {
+        padding: 1rem;
+    }
+}
+
 @media (min-width: 1024px) {
     .adaptive-grid {
         grid-template-columns: 300px 1fr 300px;
@@ -64,9 +102,8 @@ main > div {
         grid-template-areas: "left center right";
         gap: 1.5rem;
     }
-    
     main > div {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 }
 

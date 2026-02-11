@@ -17,6 +17,12 @@ window.toggleDia = function(idDia) {
 function inicializar() {
     cargarNombre();
     cargarViajeDesdeURL();
+    // Habilitar el botón de editar viaje por si está deshabilitado por defecto
+    const btnEditar = document.getElementById('btn-editar-viaje');
+    if (btnEditar) {
+        btnEditar.disabled = false;
+        btnEditar.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
 }
 
 function cargarNombre() {
@@ -186,6 +192,15 @@ function mostrarDatosViaje(viaje) {
     if (typeof window.cargarGastosDesdeDB === 'function') {
         window.cargarGastosDesdeDB(viaje.id_viaje);
     }
+        // Habilitar y configurar el botón de editar viaje
+        const btnEditar = document.getElementById('btn-editar-viaje');
+        if (btnEditar) {
+            btnEditar.disabled = false;
+            btnEditar.classList.remove('opacity-50', 'cursor-not-allowed');
+            btnEditar.addEventListener('click', function() {
+                window.location.href = `editarViaje.html?id=${viaje.id_viaje || viaje.id}`;
+            });
+        }
 }
 
 // Función auxiliar para normalizar fechas a formato ISO (YYYY-MM-DD)
@@ -333,9 +348,9 @@ function mostrarColaboradores(colaboradores) {
                 <div class="h-10 w-10 bg-${colorClase}-100 rounded-full flex items-center justify-center mr-3">
                     <i class="fas fa-user text-${colorClase}-600"></i>
                 </div>
-                <div class="flex-1">
-                    <p class="font-medium text-gray-800 text-sm">${colaborador.nombre}</p>
-                    <p class="text-xs text-gray-500">${rolTexto}</p>
+                <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-800 truncate">${colaborador.nombre}</p>
+                    <p class="text-xs text-gray-500 truncate">${rolTexto}</p>
                 </div>
             </div>
         `;
@@ -712,6 +727,43 @@ function deshabilitarTodosLosCampos() {
         btn.style.opacity = '0.5';
         btn.style.cursor = 'not-allowed';
     });
+    // Asegurar que el botón de editar viaje esté habilitado
+    const btnEditar = document.getElementById('btn-editar-viaje');
+    if (btnEditar) {
+        btnEditar.disabled = false;
+        btnEditar.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
 
     console.log('Campos deshabilitados - Modo solo lectura (calendario activo)');
 }
+
+// Mostrar puntos de origen y destino en el mapa si existen valores
+function mostrarPuntosOrigenDestino() {
+    const inputOrigen = document.getElementById('input-origen');
+    const inputDestino = document.getElementById('input-destino');
+    if (!window.mapa || !window.mapa.mostrarPuntosViajes || !inputOrigen || !inputDestino) return;
+    const puntos = [];
+    if (inputOrigen.value) puntos.push({ ciudad: inputOrigen.value });
+    if (inputDestino.value) puntos.push({ ciudad: inputDestino.value });
+    const geocoder = new google.maps.Geocoder();
+    Promise.all(puntos.map(punto => new Promise(resolve => {
+        geocoder.geocode({ address: punto.ciudad }, (results, status) => {
+            if (status === 'OK' && results[0]) {
+                punto.lat = results[0].geometry.location.lat();
+                punto.lng = results[0].geometry.location.lng();
+            }
+            resolve();
+        });
+    }))).then(() => {
+        const puntosConCoords = puntos.filter(p => p.lat && p.lng);
+        window.mapa.mostrarPuntosViajes(puntosConCoords);
+    });
+}
+
+// Llama a la función cuando cambian los campos de origen o destino
+['input-origen', 'input-destino'].forEach(id => {
+    const input = document.getElementById(id);
+    if (input) {
+        input.addEventListener('change', mostrarPuntosOrigenDestino);
+    }
+});

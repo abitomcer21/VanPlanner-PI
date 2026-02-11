@@ -1,3 +1,4 @@
+/* Eliminadas reglas de sidebar móvil para restaurar sidebar fijo clásico */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

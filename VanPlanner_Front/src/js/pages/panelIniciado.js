@@ -237,6 +237,7 @@ function cargarViajesUsuario() {
                 mostrarProximoViaje(viajes);
                 mostrarTodosLosViajes(viajes);
                 actualizarResumen(viajes);
+                mostrarPuntosViajesEnMapa(viajes);
             })
             .catch(error => {
                 console.error('Error al cargar los viajes:', error);
@@ -634,4 +635,29 @@ function mostrarMensajeExito(mensaje) {
             document.body.removeChild(mensajeDiv);
         }, 500);
     }, 3000);
+}
+
+async function mostrarPuntosViajesEnMapa(viajes) {
+    if (!window.mapa || !window.mapa.mostrarPuntosViajes) return;
+    const puntos = [];
+    for (const viaje of viajes) {
+        if (viaje.origen) puntos.push({ ciudad: viaje.origen });
+        if (viaje.destino) puntos.push({ ciudad: viaje.destino });
+    }
+    // Geolocalizar cada ciudad usando Google Maps Geocoder
+    const geocoder = new google.maps.Geocoder();
+    for (const punto of puntos) {
+        await new Promise((resolve) => {
+            geocoder.geocode({ address: punto.ciudad }, (results, status) => {
+                if (status === 'OK' && results[0]) {
+                    punto.lat = results[0].geometry.location.lat();
+                    punto.lng = results[0].geometry.location.lng();
+                }
+                resolve();
+            });
+        });
+    }
+    // Filtra los que tienen coordenadas
+    const puntosConCoords = puntos.filter(p => p.lat && p.lng);
+    window.mapa.mostrarPuntosViajes(puntosConCoords);
 }

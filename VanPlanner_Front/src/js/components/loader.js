@@ -41,7 +41,7 @@ class ComponentLoader {
         const menuToggle = document.querySelector('[data-menu-toggle]');
         if (menuToggle) {
             menuToggle.addEventListener('click', () => {
-                
+
             });
         }
     }
@@ -52,6 +52,7 @@ class ComponentLoader {
     async loadAllComponents() {
         const components = [
             { name: 'header', container: 'header-container' },
+            { name: 'header', container: 'headerLoggeado-container' },
             { name: 'footer', container: 'footer-container' }
         ];
 
