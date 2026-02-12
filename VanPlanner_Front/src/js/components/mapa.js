@@ -211,7 +211,7 @@ async function anadirPunto(placeId, nombre, direccion, lat, lng, tipo) {
 }
 
 async function sendAddParadaRequest(data) {
-    return fetch(`http://localhost:8080/VanPlannerBack/AddParadaServlet`, {
+    return fetch(`http://back.vanplanner.duckdns.org/AddParadaServlet`, {
         method: 'POST',
         body: JSON.stringify(data)
     });

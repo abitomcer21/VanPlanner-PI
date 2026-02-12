@@ -69,7 +69,7 @@ function cargarDatosViaje(idViaje) {
     }
     
     // Obtener todos los viajes del usuario y filtrar el específico
-    fetch(`http://localhost:8080/VanPlannerBack/ObtenerViajesUsuarioServlet?usuario=${idUsuario}`)
+    fetch(`http://back.vanplanner.duckdns.org/ObtenerViajesUsuarioServlet?usuario=${idUsuario}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status}`);
@@ -264,7 +264,7 @@ async function cargarVehiculo(vehiculoId) {
         }
 
         // Obtener todos los vehículos del usuario
-        const response = await fetch(`http://localhost:8080/VanPlannerBack/ObtenerVehiculosServlet?usuario_id=${usuarioId}`);
+        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerVehiculosServlet?usuario_id=${usuarioId}`);
 
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
@@ -313,7 +313,7 @@ function mostrarVehiculo(vehiculo) {
 // Función para cargar colaboradores del viaje
 async function cargarColaboradores(idViaje) {
     try {
-        const response = await fetch(`http://localhost:8080/VanPlannerBack/ObtenerColaboradoresServlet?id_viaje=${idViaje}`);
+        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerColaboradoresServlet?id_viaje=${idViaje}`);
 
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
@@ -369,7 +369,7 @@ async function cargarParadas(viajeId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:8080/VanPlannerBack/ObtenerParadasServlet?id_viaje=${viajeId}`);
+        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerParadasServlet?id_viaje=${viajeId}`);
         
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);

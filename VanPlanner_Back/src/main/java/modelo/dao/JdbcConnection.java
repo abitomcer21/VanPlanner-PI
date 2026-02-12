@@ -21,7 +21,7 @@ public class JdbcConnection {
 		String db = "vanplanner_db";
 		String user = "abi";
 		String pass = "12345.aa";
-		String url = "jdbc:mysql://localhost:3306/" + db + "?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci";
+		String url = "jdbc:mysql://192.168.1.243:3306/" + db + "?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci";
 		
 		try {
 			// Cargar el conector de MySQL

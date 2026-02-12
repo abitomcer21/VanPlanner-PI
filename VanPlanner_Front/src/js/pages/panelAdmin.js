@@ -1,5 +1,5 @@
 // URL base del backend
-const API_BASE_URL = 'http://localhost:8080/VanPlannerBack';
+const API_BASE_URL = 'http://back.vanplanner.duckdns.org';
 
 // Referencias a elementos del DOM
 const btnNuevoUsuario = document.getElementById('btnNuevoUsuario');

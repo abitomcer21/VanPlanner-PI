@@ -24,7 +24,7 @@ function cargarRecordatorios() {
         return;
     }
     
-    fetch(`http://localhost:8080/VanPlannerBack/ObtenerRecordatoriosServlet?usuario_id=${usuarioId}`)
+    fetch(`http://back.vanplanner.duckdns.org/ObtenerRecordatoriosServlet?usuario_id=${usuarioId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status}`);
@@ -109,7 +109,7 @@ function agregarRecordatorio() {
     params.append('usuario_id', usuarioId);
     params.append('texto', textoRecordatorio);
     
-    fetch('http://localhost:8080/VanPlannerBack/AddRecordatorioServlet', {
+    fetch('http://back.vanplanner.duckdns.org/AddRecordatorioServlet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -137,7 +137,7 @@ function toggleRecordatorio(idRecordatorio, completado) {
     params.append('id_recordatorio', idRecordatorio);
     params.append('completado', completado);
     
-    fetch('http://localhost:8080/VanPlannerBack/ActualizarRecordatorioServlet', {
+    fetch('http://back.vanplanner.duckdns.org/ActualizarRecordatorioServlet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -169,7 +169,7 @@ function eliminarRecordatorio(idRecordatorio) {
     const params = new URLSearchParams();
     params.append('id_recordatorio', idRecordatorio);
     
-    fetch('http://localhost:8080/VanPlannerBack/EliminarRecordatorioServlet', {
+    fetch('http://back.vanplanner.duckdns.org/EliminarRecordatorioServlet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -225,7 +225,7 @@ function cargarViajesUsuario() {
         console.log('Cargando viajes para usuario ID:', idUsuario);
 
         // Hacer petición al servlet para obtener los viajes del usuario
-        fetch(`http://localhost:8080/VanPlannerBack/ObtenerViajesUsuarioServlet?usuario=${idUsuario}`)
+        fetch(`http://back.vanplanner.duckdns.org/ObtenerViajesUsuarioServlet?usuario=${idUsuario}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
@@ -487,7 +487,7 @@ function confirmarEliminacion() {
 
 async function eliminarViaje(idViaje) {
     try {
-        const response = await fetch('http://localhost:8080/VanPlannerBack/EliminarViajeServlet', {
+        const response = await fetch('http://back.vanplanner.duckdns.org/EliminarViajeServlet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -567,7 +567,7 @@ function enviarInvitacionColaborador(event) {
     console.log('Enviando invitación a colaborador:', datos);
 
     // Hacer la petición al servlet
-    fetch('http://localhost:8080/VanPlannerBack/AddColaboradorServlet', {
+    fetch('http://back.vanplanner.duckdns.org/AddColaboradorServlet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

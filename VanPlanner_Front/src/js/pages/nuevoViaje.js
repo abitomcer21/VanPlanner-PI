@@ -58,7 +58,7 @@ async function verificarVehiculosUsuario() {
     }
 
     try {
-        const url = `http://localhost:8080/VanPlannerBack/ObtenerVehiculosServlet?usuario_id=${usuarioId}`;
+        const url = `http://back.vanplanner.duckdns.org/ObtenerVehiculosServlet?usuario_id=${usuarioId}`;
         console.log('Consultando URL:', url);
         
         const response = await fetch(url);
@@ -138,7 +138,7 @@ function configurarFormularioVehiculo() {
 
             try {
                 console.log('Enviando petición al servidor...');
-                const response = await fetch('http://localhost:8080/VanPlannerBack/AddVehiculoServlet', {
+                const response = await fetch('http://back.vanplanner.duckdns.org/AddVehiculoServlet', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -179,7 +179,7 @@ async function cargarYMostrarVehiculos() {
     }
     
     try {
-        const response = await fetch(`http://localhost:8080/VanPlannerBack/ObtenerVehiculosServlet?usuario_id=${usuarioId}`);
+        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerVehiculosServlet?usuario_id=${usuarioId}`);
         const vehiculos = await response.json();
         
         if (vehiculos && vehiculos.length > 0) {
@@ -585,7 +585,7 @@ async function crearViaje(origen, destino) {
     // Obtener el vehículo del usuario
     let vehiculoId = null;
     try {
-        const responseVehiculos = await fetch(`http://localhost:8080/VanPlannerBack/ObtenerVehiculosServlet?usuario_id=${usuarioId}`);
+        const responseVehiculos = await fetch(`http://back.vanplanner.duckdns.org/ObtenerVehiculosServlet?usuario_id=${usuarioId}`);
         const vehiculos = await responseVehiculos.json();
         
         if (vehiculos && vehiculos.length > 0) {
@@ -616,7 +616,7 @@ async function crearViaje(origen, destino) {
     console.log('Datos del viaje a guardar:', viajeData);
     
     try {
-        const response = await fetch('http://localhost:8080/VanPlannerBack/CrearViajeServlet', {
+        const response = await fetch('http://back.vanplanner.duckdns.org/CrearViajeServlet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
