@@ -166,7 +166,7 @@ class LoginPage {
     }
 
     async sendLoginRequest(data) {
-        return fetch(`http://back.vanplanner.duckdns.org/LoginServlet?usuario=${data.usuario}&password=${data.password}`);
+        return fetch(`https://back.vanplanner.duckdns.org/LoginServlet?usuario=${data.usuario}&password=${data.password}`);
     }
 
     async simulateLogin(data) {

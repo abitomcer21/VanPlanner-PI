@@ -139,7 +139,7 @@ async function registrarseClick(event) {
 }
 
 async function sendRegistroRequest(data) {
-    return fetch(`http://back.vanplanner.duckdns.org/RegistroServlet`, {
+    return fetch(`https://back.vanplanner.duckdns.org/RegistroServlet`, {
         method: 'POST',
         body: JSON.stringify(data)
     });

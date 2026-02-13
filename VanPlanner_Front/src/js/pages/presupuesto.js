@@ -70,7 +70,7 @@ async function enviarGastoAlBackend(tipo, descripcion, cantidad) {
     };
 
     try {
-        const response = await fetch('http://back.vanplanner.duckdns.org/AddGastoServlet', {
+        const response = await fetch('https://back.vanplanner.duckdns.org/AddGastoServlet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -192,7 +192,7 @@ async function cargarGastosDesdeDB(viajeId) {
     try {
         console.log('Intentando cargar gastos del viaje:', viajeId);
         
-        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerGastosServlet?id_viaje=${viajeId}`);
+        const response = await fetch(`https://back.vanplanner.duckdns.org/ObtenerGastosServlet?id_viaje=${viajeId}`);
         
         if (!response.ok) {
             console.warn(`Servlet de gastos no disponible (${response.status}). Los gastos no se cargarán.`);

@@ -41,7 +41,7 @@ function cargarViajes() {
         console.log('Cargando viajes para usuario ID:', idUsuario);
 
         // Hacer petición al servlet para obtener los viajes del usuario
-        fetch(`http://back.vanplanner.duckdns.org/ObtenerViajesUsuarioServlet?usuario=${idUsuario}`)
+        fetch(`https://back.vanplanner.duckdns.org/ObtenerViajesUsuarioServlet?usuario=${idUsuario}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
@@ -178,7 +178,7 @@ function confirmarEliminacion() {
 // Función para eliminar un viaje
 async function eliminarViaje(idViaje) {
     try {
-        const response = await fetch('http://back.vanplanner.duckdns.org/EliminarViajeServlet', {
+        const response = await fetch('https://back.vanplanner.duckdns.org/EliminarViajeServlet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

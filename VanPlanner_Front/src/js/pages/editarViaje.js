@@ -87,7 +87,7 @@ function cargarDatosViaje(idViaje) {
     }
 
     // Obtener todos los viajes del usuario y filtrar el específico
-    fetch(`http://back.vanplanner.duckdns.org/ObtenerViajesUsuarioServlet?usuario=${idUsuario}`)
+    fetch(`https://back.vanplanner.duckdns.org/ObtenerViajesUsuarioServlet?usuario=${idUsuario}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error HTTP: ${response.status}`);
@@ -251,7 +251,7 @@ async function cargarVehiculo(vehiculoId) {
         }
 
         // Obtener todos los vehículos del usuario
-        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerVehiculosServlet?usuario_id=${usuarioId}`);
+        const response = await fetch(`https://back.vanplanner.duckdns.org/ObtenerVehiculosServlet?usuario_id=${usuarioId}`);
 
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
@@ -300,7 +300,7 @@ function mostrarVehiculo(vehiculo) {
 // Función para cargar colaboradores del viaje
 async function cargarColaboradores(idViaje) {
     try {
-        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerColaboradoresServlet?id_viaje=${idViaje}`);
+        const response = await fetch(`https://back.vanplanner.duckdns.org/ObtenerColaboradoresServlet?id_viaje=${idViaje}`);
 
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
@@ -361,7 +361,7 @@ async function eliminarColaborador(idColaborador) {
     }
 
     try {
-        const response = await fetch('http://back.vanplanner.duckdns.org/EliminarColaboradorServlet', {
+        const response = await fetch('https://back.vanplanner.duckdns.org/EliminarColaboradorServlet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -438,7 +438,7 @@ function enviarInvitacionColaborador(event) {
     console.log('Enviando invitación a colaborador:', datos);
 
     // Hacer la petición al servlet
-    fetch('http://back.vanplanner.duckdns.org/AddColaboradorServlet', {
+    fetch('https://back.vanplanner.duckdns.org/AddColaboradorServlet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -568,7 +568,7 @@ async function guardarDistanciaEnBaseDatos(idViaje, distanciaKm) {
         };
         console.log('Body a enviar:', JSON.stringify(body));
         
-        const response = await fetch('http://back.vanplanner.duckdns.org/ActualizarFechasViajeServlet', {
+        const response = await fetch('https://back.vanplanner.duckdns.org/ActualizarFechasViajeServlet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -591,7 +591,7 @@ async function guardarDistanciaEnBaseDatos(idViaje, distanciaKm) {
 // Función para obtener coordenadas desde la tabla paradas
 async function obtenerCoordenadasDesdeParadas(idViaje) {
     try {
-        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerParadasServlet?id_viaje=${idViaje}`);
+        const response = await fetch(`https://back.vanplanner.duckdns.org/ObtenerParadasServlet?id_viaje=${idViaje}`);
 
         if (!response.ok) {
             console.log('No se pudieron obtener las paradas');
@@ -983,7 +983,7 @@ console.log('JSON a enviar:', JSON.stringify(parada, null, 2));
 console.log('===================');
 
 try {
-    const response = await fetch('http://back.vanplanner.duckdns.org/AddParadaServlet', {
+    const response = await fetch('https://back.vanplanner.duckdns.org/AddParadaServlet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -1060,7 +1060,7 @@ async function cargarParadas(viajeId) {
     }
 
     try {
-        const response = await fetch(`http://back.vanplanner.duckdns.org/ObtenerParadasServlet?id_viaje=${viajeId}`);
+        const response = await fetch(`https://back.vanplanner.duckdns.org/ObtenerParadasServlet?id_viaje=${viajeId}`);
         
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
